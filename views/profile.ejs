@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Tweet wallet</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/314d085fdf.js" crossorigin="anonymous"></script>
+        <!-- Favicons -->
+
+
+
+        <style>
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            /*primary-color: #006600;
+        secondary-color: #003300;
+
+        #309030
+      */
+
+            body {
+                background-color: #eafbea;
+            }
+
+            .back a {
+                background: #ccc;
+                color: rgb(126, 114, 114);
+                padding: 8px 16px;
+                border-radius: 7px;
+                text-decoration: none;
+            }
+
+            .fa-user-circle {
+                font-size: 68px;
+            }
+
+            .icon {
+                text-align: center;
+            }
+
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                    font-size: 3.5rem;
+                }
+            }
+
+            @media (max-width: 400px) {
+                h4 {
+                    font-size: 20px !important;
+                }
+
+                .h5-text {
+                    font-size: 13px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+
+
+        <main role="main" class="mb-5">
+
+            <div class="container">
+                <header class="pt-5 justify-content-between row pl-3 pr-3 pb-5">
+                    <div class="back">
+                        <a href="/dashboard">&lArr; Back to Dashboard</a>
+                    </div>
+                    <div class="back">
+                        <a href="/users/login">Logout</a>
+                    </div>
+                </header>
+
+                <div class="icon p-4">
+                    <i class="fas text-success fa-user-circle"></i>
+                </div>
+
+                <div class="container">
+                    <div class="row mx-auto">
+                        <div class="col-sm-offset-2 col-sm-12">
+                            <form action="dashboard.html" method="">
+
+                                <h4>Personal Information</h4>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="twitter_username" class="m-0">Twitter username</label>
+                                            <input type="text" id="twitter_username" class="form-control input-md"
+                                                value="<%= username %>" placeholder="Username" disabled="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="fullname" class="m-0">Fullname</label>
+                                            <input type="text" name="fullname" id="first_name"
+                                                class="form-control input-md" value="<%= fullname %>"
+                                                placeholder="Firstname Lastname">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <label class="m-0" for="number">Whatsapp
+                                                number</label>
+                                            <input type="number" class="form-control" name="account_number" id="phone"
+                                               value="<%= number %>" placeholder="Whatsapp number" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <label class="m-0" for="account_name">Account name</label>
+                                            <input type="text" name="account_name" class="form-control" id="inputName"
+                                              value="<%= accountname %>" placeholder="Account name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <label class="m-0" for="number">Account number</label>
+                                            <input type="number" class="form-control" name="account_number" id="phone"
+                                               value="<%= accountnumber %>" placeholder="Account number" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <label class="m-0" for="username">Bank name</label>
+                                            <select id="account_bank" name="account_bank" value="<%= accountbank %>"
+                                                class="form-control custom-select" required>
+                                                <option value="">--Select Bank-- </option>
+                                                <option value="Access Bank"> Access Bank</option>
+
+                                                <option value="Access Bank (Diamond)"> Access Bank (Diamond)</option>
+
+                                                <option value="ALAT by WEMA"> ALAT by WEMA</option>
+
+                                                <option value="ASO Savings and Loans"> ASO Savings and Loans</option>
+
+                                                <option value="CEMCS Microfinance Bank"> CEMCS Microfinance Bank
+                                                </option>
+
+                                                <option value="Citibank Nigeria"> Citibank Nigeria</option>
+
+                                                <option value="Ecobank Nigeria"> Ecobank Nigeria</option>
+
+                                                <option value="Ekondo Microfinance Bank"> Ekondo Microfinance Bank
+                                                </option>
+
+                                                <option value="Fidelity Bank"> Fidelity Bank</option>
+
+                                                <option value="First Bank of Nigeria"> First Bank of Nigeria</option>
+
+                                                <option value="First City Monument Bank"> First City Monument Bank
+                                                </option>
+
+                                                <option value="Globus Bank"> Globus Bank</option>
+
+                                                <option value="Guaranty Trust Bank"> Guaranty Trust Bank</option>
+
+                                                <option value="Heritage Bank"> Heritage Bank</option>
+
+                                                <option value="Jaiz Bank"> Jaiz Bank</option>
+
+                                                <option value="Keystone Bank"> Keystone Bank</option>
+
+                                                <option value="Kuda Bank"> Kuda Bank</option>
+
+                                                <option value="Parallex Bank"> Parallex Bank</option>
+
+                                                <option value="Polaris Bank"> Polaris Bank</option>
+
+                                                <option value="Providus Bank"> Providus Bank</option>
+
+                                                <option value="Rubies MFB"> Rubies MFB</option>
+
+                                                <option value="Sparkle Microfinance Bank"> Sparkle Microfinance Bank
+                                                </option>
+
+                                                <option value="Stanbic IBTC Bank"> Stanbic IBTC Bank</option>
+
+                                                <option value="Standard Chartered Bank"> Standard Chartered Bank
+                                                </option>
+
+                                                <option value="Sterling Bank"> Sterling Bank</option>
+
+                                                <option value="Suntrust Bank"> Suntrust Bank</option>
+
+                                                <option value="TAJ Bank"> TAJ Bank</option>
+
+                                                <option value="Titan Bank"> Titan Bank</option>
+
+                                                <option value="Union Bank of Nigeria"> Union Bank of Nigeria</option>
+
+                                                <option value="United Bank For Africa"> United Bank For Africa</option>
+
+                                                <option value="Unity Bank"> Unity Bank</option>
+
+                                                <option value="VFD"> VFD</option>
+
+                                                <option value="Wema Bank"> Wema Bank</option>
+
+                                                <option value="Zenith Bank"> Zenith Bank</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <button type="submit" class="btn btn-success h5-text">Save Changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+        </main>
+
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+
+        <script src="/js/bootstrap.bundle.min.js"
+            integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
+        </script>
+    </body>
+</html>

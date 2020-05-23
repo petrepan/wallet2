@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Tweet wallet</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/314d085fdf.js" crossorigin="anonymous"></script>
+        <!-- Favicons -->
+
+
+
+        <style>
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            /*primary-color: #006600;
+        secondary-color: #003300;
+
+        #309030
+      */
+
+            .navbar-toggler {
+                background-color: #309030 !important;
+            }
+
+            .jumbotron {
+                background-color: rgb(158, 163, 158);
+            }
+
+            .green-gradient {
+                background-image: -webkit-linear-gradient(286deg, #90cc41, #21954a);
+                background-image: linear-gradient(164deg, #90cc41, #21954a);
+            }
+
+            footer {
+                background-color: #309030;
+            }
+
+            footer a {
+                font-size: 14px !important;
+            }
+
+            .icon {
+                font-size: 32px !important;
+                color: #309030;
+            }
+
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                    font-size: 3.5rem;
+                }
+            }
+
+            @media (max-width: 400px) {
+                .h5-text {
+                    font-size: 14px;
+                }
+            }
+        </style>
+    </head>
+    <body class="text-center">
+        <form action="/users/login" method="POST" class="pt-5 needs-validation" novalidate>
+            <div class="container d-flex pt-5 justify-content-center">
+                <div class="">
+                    <a href="/"><img class="mb-4" src="/img/TweetWallet green.jpg" alt="logo" width="220"
+                            height="50"></a>
+                            <%- include('partials/messages') %>
+                    <h1 class="h4 mb-4 font-weight-normal">Login to your dashboard</h1>
+                    <div class="mb-3 mt-3">
+                        <label for="username" class="sr-only">Twitter handle</label>
+                        <input type="text" name="username" id="username" class="form-control" placeholder="Twitter handle" required=""
+                            autofocus="">
+                    </div>
+                    <div class="mb-1 mb-2">
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                            required="">
+                    </div>
+                    <div class="checkbox mb-3 d-flex h5-text justify-content-between">
+                        <div>
+                            <a href="">Forgot your password?</a>
+                        </div>
+                    </div>
+                    <button class="btn btn-lg h5-text btn-success btn-block" type="submit">Login to your
+                        dashboard</button>
+                    <p class="mb-3 h5-text">Don't have a Tweetwallet account? <a href="/users/register">Sign up</a></p>
+                </div>
+            </div>
+        </form>
+
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+                'use strict';
+                window.addEventListener('load', function () {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+
+        <script src="/js/bootstrap.bundle.min.js"
+            integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
+        </script>
+    </body>
+</html>

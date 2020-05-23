@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Tweet wallet</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/314d085fdf.js" crossorigin="anonymous"></script>
+        <!-- Favicons -->
+
+
+        <style>
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            /*primary-color: #006600;
+        secondary-color: #003300;
+
+        #309030
+      */
+
+            .navbar-toggler {
+                background-color: #309030 !important;
+            }
+
+            body {
+                background-color: #eafbea;
+            }
+
+            .jumbotron {
+                background-color: rgb(158, 163, 158);
+            }
+
+            .green-gradient {
+                background-image: -webkit-linear-gradient(286deg, #90cc41, #21954a);
+                background-image: linear-gradient(164deg, #90cc41, #21954a);
+            }
+
+            footer {
+                background-color: #309030;
+            }
+
+            footer a {
+                font-size: 14px !important;
+            }
+
+            .icon {
+                font-size: 32px !important;
+                color: #309030;
+            }
+
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                    font-size: 3.5rem;
+                }
+            }
+
+            @media (max-width: 400px) {
+                .h5-text {
+                    font-size: 14px;
+                }
+
+                .h4 {
+                    font-size: 20px !important;
+                }
+            }
+
+        </style>
+    </head>
+    <body class="text-center">
+
+        <form action="/users/register" method="POST" class="pt-4 needs-validation" novalidate>
+            <div class="container w-100 d-flex pt-5 justify-content-center">
+                <div class="w-75">
+                    <h1 class="h4 mb-4 text-left text-secondary font-weight-bold">Let's get you started with your
+                        Tweetwallet
+                        account</h1>
+                    <div>
+                        <%- include('partials/messages') %>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="text-left mb-3">
+                                    <label class="m-0" for="fullname">Full name</label>
+                                    <input type="text" name="fullname" class="form-control" id="fullname"
+                                        placeholder="Firstname  Lastname"
+                                        value="<%= typeof fullname != 'undefined' ? fullname : '' %>" required>
+                                </div>
+                                <div class="text-left mb-3">
+                                    <label class="m-0" for="username">Twitter handle</label>
+                                    <input type="text" name="username" class="form-control" id="username"
+                                        placeholder="Twitter handle"
+                                        value="<%= typeof username != 'undefined' ? username : '' %>" required>
+                                </div>
+                                <div class="text-left mb-3">
+                                    <label class="m-0" for="inputEmail">Whatsapp number</label>
+                                    <input type="number" name="number" id="number" class="form-control"
+                                        placeholder="Whatsapp number"
+                                        value="<%= typeof number != 'undefined' ? number : '' %>" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-left mb-3">
+                                    <label class="m-0" for="accountname">Account name</label>
+                                    <input type="text" name="accountname" class="form-control" id="accountname"
+                                        placeholder="Account name"
+                                        value="<%= typeof accountname != 'undefined' ? accountname : '' %>" required>
+                                </div>
+                                <div class="text-left mb-3">
+                                    <label class="m-0" for="number">Account number</label>
+                                    <input type="number" class="form-control" name="accountnumber" id="phone"
+                                        placeholder="Account number"
+                                        value="<%= typeof accountnumber != 'undefined' ? accountnumber : '' %>" required>
+                                </div>
+                                <div class="text-left mb-3">
+                                    <label class="m-0" for="username">Bank name</label>
+                                    <select id="accountbank" name="accountbank" class="form-control custom-select"
+                                        value="<%= typeof accountbank != 'undefined' ? accountbank : '' %>"
+                                        required>
+                                        <option value="" selected="">--Select Bank-- </option>
+                                        <option value="Access Bank"> Access Bank</option>
+
+                                        <option value="Access Bank (Diamond)"> Access Bank (Diamond)</option>
+
+                                        <option value="ALAT by WEMA"> ALAT by WEMA</option>
+
+                                        <option value="ASO Savings and Loans"> ASO Savings and Loans</option>
+
+                                        <option value="CEMCS Microfinance Bank"> CEMCS Microfinance Bank</option>
+
+                                        <option value="Citibank Nigeria"> Citibank Nigeria</option>
+
+                                        <option value="Ecobank Nigeria"> Ecobank Nigeria</option>
+
+                                        <option value="Ekondo Microfinance Bank"> Ekondo Microfinance Bank</option>
+
+                                        <option value="Fidelity Bank"> Fidelity Bank</option>
+
+                                        <option value="First Bank of Nigeria"> First Bank of Nigeria</option>
+
+                                        <option value="First City Monument Bank"> First City Monument Bank</option>
+
+                                        <option value="Globus Bank"> Globus Bank</option>
+
+                                        <option value="Guaranty Trust Bank"> Guaranty Trust Bank</option>
+
+                                        <option value="Heritage Bank"> Heritage Bank</option>
+
+                                        <option value="Jaiz Bank"> Jaiz Bank</option>
+
+                                        <option value="Keystone Bank"> Keystone Bank</option>
+
+                                        <option value="Kuda Bank"> Kuda Bank</option>
+
+                                        <option value="Parallex Bank"> Parallex Bank</option>
+
+                                        <option value="Polaris Bank"> Polaris Bank</option>
+
+                                        <option value="Providus Bank"> Providus Bank</option>
+
+                                        <option value="Rubies MFB"> Rubies MFB</option>
+
+                                        <option value="Sparkle Microfinance Bank"> Sparkle Microfinance Bank</option>
+
+                                        <option value="Stanbic IBTC Bank"> Stanbic IBTC Bank</option>
+
+                                        <option value="Standard Chartered Bank"> Standard Chartered Bank</option>
+
+                                        <option value="Sterling Bank"> Sterling Bank</option>
+
+                                        <option value="Suntrust Bank"> Suntrust Bank</option>
+
+                                        <option value="TAJ Bank"> TAJ Bank</option>
+
+                                        <option value="Titan Bank"> Titan Bank</option>
+
+                                        <option value="Union Bank of Nigeria"> Union Bank of Nigeria</option>
+
+                                        <option value="United Bank For Africa"> United Bank For Africa</option>
+
+                                        <option value="Unity Bank"> Unity Bank</option>
+
+                                        <option value="VFD"> VFD</option>
+
+                                        <option value="Wema Bank"> Wema Bank</option>
+
+                                        <option value="Zenith Bank"> Zenith Bank</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="mb-3 text-left">
+                            <label class="m-0" for="password">Password</label>
+                            <input type="password" name="password" id="inputPassword"
+                                value="<%= typeof password != 'undefined' ? password : '' %>" class="form-control"
+                                placeholder="Password" required="">
+                        </div>
+                        <div class="mb-3 text-left">
+                            <label class="m-0" for="password2">Confirm password</label>
+                            <input type="password" name="password2" id="inputPassword" class="form-control"
+                                placeholder="Confirm password"
+                                value="<%= typeof password2 != 'undefined' ? password2 : '' %>" required="">
+                        </div>
+
+
+                    </div>
+                    <button class="btn m-3 btn-success h5-text" type="submit">Get started</button>
+
+                    <div class="text-left">
+                        <p class="text-left h5-text">By clicking the "Get Started" button, you are creating a
+                            Tweetwallet account and
+                            you agree to Tweetwallet's Terms of Use and Privacy Policy</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <p class="lead mb-3 pb-5">
+            Have an account? <a href="/users/login">Login</a>
+        </p>
+
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+                'use strict';
+                window.addEventListener('load', function () {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+
+        <script src="/js/bootstrap.bundle.min.js"
+            integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
+        </script>
+    </body>
+</html>
