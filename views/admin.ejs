@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Tweet wallet</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/314d085fdf.js" crossorigin="anonymous"></script>
+        <!-- Favicons -->
+
+
+
+        <style>
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: #eafbea;
+            }
+
+            nav {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: #fff;
+                z-index: 3;
+            }
+
+            .imgnone {
+                display: none;
+            }
+
+            .nav-item span {
+                display: block;
+            }
+
+            ul {
+                list-style: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 10px;
+                text-align: center;
+            }
+
+            .current {
+                background-color: #eafbea;
+                border-radius: 5px;
+            }
+
+            .tab-content {
+                display: none;
+            }
+
+
+
+            .current {
+                display: inherit;
+            }
+
+            .current i {
+                color: green;
+            }
+
+            .username {
+                font-size: 24px;
+                font-weight: 600;
+            }
+
+            .fa-user-circle {
+                font-size: 42px;
+            }
+
+            .shield {
+                display: block;
+            }
+
+            .shield i {
+                font-size: 32px;
+            }
+
+            .currentplan {
+                border: 1px solid green;
+                padding: 16px;
+                border-radius: 6px;
+            }
+
+            .cplan {
+                font-weight: 100;
+                font-size: 13px;
+            }
+
+            .todaytask::before {
+                content: "";
+                background-color: rgba(0, 102, 0, 0.278);
+                bottom: 0;
+                height: 15px;
+                width: 150px;
+                position: absolute;
+                z-index: -1;
+            }
+
+            .todaytask {
+                position: relative;
+                z-index: 1;
+            }
+
+            .withdrawss {
+                border: 1px solid green;
+                padding: 16px;
+                border-radius: 6px;
+            }
+
+            .amount {
+                font-size: 32px;
+            }
+
+            .copy {
+                font-size: 16px;
+            }
+
+            /*primary-color: #006600;
+        secondary-color: #003300;
+
+        #309030
+      */
+
+            /* @media (min-width: 1030px) {
+                nav {
+                    position: fixed;
+                    left: 0 !important;
+                    background-color: #fff;
+                    z-index: 1;
+                    width: 250px;
+                    height: 100vh;
+                    padding-top: 25px;
+                }
+                
+               nav a{
+                    display: block!important;
+                }
+
+                  ul {
+                  list-style: none;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  margin: 25px;
+                  text-align: center;
+                  }
+
+                  main{
+                      width: calc(100%-250px)!important;
+                      margin: auto!important;
+                      position: absolute;
+                      right: 10%;
+                      overflow: auto;
+                  }
+            } */
+
+        </style>
+    </head>
+
+    <body>
+        <div class="container mt-3">
+            <div class="col-md-12 pb-5">
+                <div class="col-12">
+                    <h4 class="text-center p-3">Withdrawal</h4>
+                </div>
+                <div class="table-responsive text-nowrap mt-3">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                               
+                                <th scope="Status">Username</th>
+                                <th scope="Date">Bank account</th>
+                                <th scope="Date">Account number</th>
+                                <th scope="Date">Amount withdrawn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <% data.filter(function(item){ %>
+                            <tr>
+                                <td><%= item.username %></td>
+                                <td><%= item.accountbank %></td>
+                                <td><%= item.accountnumber %></td>
+                                <td><%= item.amountwithdraw %></td>
+                            </tr>
+                            <% }); %>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>

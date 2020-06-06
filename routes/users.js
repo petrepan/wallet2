@@ -5,6 +5,7 @@ const passport = require("passport")
 //user model
 const User = require('../models/User');
 
+
 //login page
 router.get("/login", (req, res) => {
   res.render("login");
@@ -25,7 +26,7 @@ router.post("/register", (req, res) => {
     accountnumber,
     accountbank,
     password,
-    password2
+    password2,
   } = req.body;
   let errors = [];
   //check required fields
@@ -54,15 +55,16 @@ router.post("/register", (req, res) => {
 
     if (errors.length > 0) {
         res.render("register", {
-            errors,
-            fullname,
-            username,
-            number,
-            accountname,
-            accountnumber,
-            accountbank,
-            password,
-            password2
+          errors,
+          fullname,
+          username,
+          number,
+          accountname,
+          accountnumber,
+          accountbank,
+          password,
+          password2,
+          
         });
     } else {
         //Validation pass
