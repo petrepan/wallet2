@@ -1,3 +1,4 @@
+const cool = require("cool-ascii-faces");
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const path = require("path");
@@ -117,6 +118,7 @@ app.post("/task", upload.any(), (req, res) => {
 //Routes
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
+app.get("/cool", (req, res) => res.send(cool()));
 
 
 
