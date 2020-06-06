@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
   },
   "keywords": [
     "Tweet",
@@ -31,5 +32,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
+  },
+  "engines": {
+    "node": "10.16.0"
   }
 }
