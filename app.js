@@ -19,9 +19,11 @@ require("./config/passport")(passport)
 const Task = require("./models/Task");
 
 //db config
-const db = require('./config/keys').MongoURI;
+// const db = require('./config/keys').MongoURI;
 
 const mongoURI = "mongodb+srv://peter123:petrepan1234@cluster0-nr9jq.mongodb.net/test?retryWrites=true&w=majority"; 
+
+const mongoDB = process.env.mongoDB_URI || mongoURI;
 
 const conn = mongoose.createConnection(mongoURI, {
   useNewUrlParser: true,
@@ -62,9 +64,9 @@ const upload = multer({ storage });
 
 //connect to mongo
 mongoose
-  .connect(db, { useUnifiedTopology: true,useNewUrlParser: true })
+  .connect(mongoURI, { useUnifiedTopology: true,useNewUrlParser: true })
   .then(()=> console.log("mongoDB connected.."))
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err)); 
 
 //ejs
 app.use(expressLayouts);

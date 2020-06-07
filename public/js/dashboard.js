@@ -1,20 +1,8 @@
-// //amount withdraw
-// let amountWithdraw = document.getElementById("amountWithdraw").value;
-// let dashBalance = document.getElementById("dashBalance").innerText;
-// let submitBtn = document.getElementById("submitBtn")
-// let result = document.getElementById("result");
+// const taskForm = document.getElementById("taskForm");
+// const taskStatus = document.getElementById("taskStatus");
 
-// function formSubmit(e) { 
-//     e.preventDefault();
-//     if (amountWithdraw > dashBalance) {
-        
-//        return result.innerText = "You cant do that";
-       
-//     }
-    
+// const submitForm = () => {
+//     taskStatus.innerText = "Task submitted";
 // }
 
-
-
-// const form = document.getElementById("form");
-// form.addEventListener("submit", formSubmit);
+// taskForm.addEventListener("submit", submitForm)
