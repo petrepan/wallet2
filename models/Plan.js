@@ -22,7 +22,7 @@ const planSchema = new Schema({
   },
   date: {
     type: Date,
-    default: Date.now,
+    default: Date.toLocaleString(),
   },
 });
 
