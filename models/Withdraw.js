@@ -19,8 +19,8 @@ const withdrawSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.toLocaleString(),
-  },
+    default: Date.now,
+  }, 
 });
 
 module.exports = mongoose.model("Withdraw", withdrawSchema);

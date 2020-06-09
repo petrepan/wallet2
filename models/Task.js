@@ -13,7 +13,7 @@ const taskSchema = new Schema({
   },
   date: {
     type: Date,
-    default: Date.toLocaleString(),
+    default: Date.now,
   },
 });
 

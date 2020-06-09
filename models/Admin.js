@@ -9,7 +9,7 @@ const AdminSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.toLocaleString(),
+    default: Date.now,
   },
 });
 
