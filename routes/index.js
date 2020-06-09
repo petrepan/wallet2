@@ -136,25 +136,28 @@ router.post("/task", (req, res) => {
 });
 
 router.post("/plan", (req, res) => {
-  const { freeplan, username, accountnumber, accountname, accountbank } = req.body;
+  const { freeplan, username, accountnumber, accountbank } = req.body;
 
   let errors = [];
 
-     Plan.findOne({ freeplan: freeplan })
+     Plan.findOne({ username: username })
        .then((plan) => {
          if (plan) {
            //user exist
            errors.push({ msg: "You can't suscribe twice on free plan, choose one of the other plans" });
-           res.render("./dashboard", {
+           res.render("dashboard", {
              errors,
              username,
-             accountname,
+             freeplan,
              accountnumber,
              accountbank
            });
          } else {
            const plan = new Plan({
              freeplan,
+             username,
+             accountnumber,
+             accountbank
            });
            //free plan
 
@@ -163,7 +166,7 @@ router.post("/plan", (req, res) => {
              .then((result) => {
                console.log(result);
                console.log(`successful${freeplan}`);
-               req.flash("success_msg", "Free Plan activated, You can now start posting your task on twitter");
+               req.flash("success_msg", "Free Plan activated, You can now start posting your task on twitter"); 
                res.redirect("/dashboard");
              })
              .catch((err) => console.log(err));

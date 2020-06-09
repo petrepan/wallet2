@@ -10,7 +10,6 @@ const planSchema = new Schema({
   },
   amountwithdraw: {
     type: Number,
-    required: true,
   },
   accountbank: {
     type: String,
