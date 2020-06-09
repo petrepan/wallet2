@@ -1,6 +1,13 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const withdrawSchema = new mongoose.Schema({
+const planSchema = new Schema({
+  freeplan: {
+    type: String,
+  },
+  username: {
+    type: String,
+  },
   amountwithdraw: {
     type: Number,
     required: true,
@@ -13,14 +20,12 @@ const withdrawSchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
-  username: {
-    type: String,
-    required: false,
-  },
   date: {
     type: Date,
     default: Date.now,
   },
 });
 
-module.exports = mongoose.model("Withdraw", withdrawSchema);
+const Plan = mongoose.model("Plan", planSchema);
+
+module.exports = Plan;

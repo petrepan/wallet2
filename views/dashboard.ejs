@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Tweet wallet</title>
+        <title>Tweet wallet | Dashboard</title>
 
         <!-- Bootstrap core CSS -->
         <link href="/css/bootstrap.min.css" rel="stylesheet"
@@ -223,6 +223,7 @@
 
                         <div class="col-sm-6">
                             <div class="card bg-light  mb-3">
+                                <form action="/plan" method="POST">
                                 <div class="card-header font-weight-bold plan" data-plan="Free">Free Trial(10days only)
                                 </div>
                                 <div class="card-body card-paragraph">
@@ -231,9 +232,15 @@
                                     </p>
                                     <p class="card-text"><span class="">Daily Revenue:</span> 100naira
                                     </p>
-                                    <a href="https://wa.me/+2348101211029?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20
-                                        FREE%20plan" class="btn card-paragraph btn-success planbtn">Subscribe</a>
+                                    <input type="text" name="username" value="<%= username %>" class="d-none">
+                                    <input type="text" name="accountnumber" value="<%= accountnumber %>" class="d-none">
+                                    <input type="text" name="freeplan" value="freeplan" class="d-none">
+                                    <a href="/freeplan" class="btn card-paragraph btn-success planbtn">Subscribe</a>
+                                    <button class="btn card-paragraph btn-success planbtn">Suscribe</button>
+                                    
                                 </div>
+                                </form>
+
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -318,7 +325,7 @@
                                 <div>
                                     <h4 class="cplan"><b> CURRENT PLAN </b></h4>
                                     <h4 id="current-plan" class="text-success card-paragraph select-plan"> You have to
-                                        choose a plan
+                                        choose a plan 
                                     </h4>
 
                                 </div>
@@ -378,34 +385,31 @@
                             <div class="col-12 mb-0 task">
                                 <div class="alert alert-dismissible font-weight-lighter alert-info mt-2">
 
-                                    Task Submission is usually between 8am - 10pm. If you could not meet with
-                                    task submission before
-                                    10pm,
-                                    you can submit the next day.
-                                    Thanks.
+                                    Task Submission can be made at anytime.
 
                                 </div>
                             </div>
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <form id="taskForm" action="/task" method="POST" enctype="multipart/form-data">
+                                        <form id="taskForm" action="/task" method="POST">
 
-                                            <!-- <div class="form-group">
-                                                <label>Username</label>
+                                            <div class="form-group">
+                                                <label class="d-none">Username</label>
                                                 <input type="text" name="username" id="username"
-                                                    class="form-control input-md" value="<%= username %>">
-                                            </div> -->
-                                            <div class="custom-file mb-3">
-                                                <input type="file" name="file1" class="custom-file-input"
-                                                    id="customFile">
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
-                                            </div> 
-                                            <div class="custom-file mb-3">
-                                                <input type="file" name="file" class="custom-file-input" required
-                                                    id="customFile">
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                                    class="form-control input-md d-none" value="<%= username %>" required>
                                             </div>
+                                            <div class="form-group">
+                                                <label class="sr-only">Task one</label>
+                                                <input type="url" name="task1" id="task1"
+                                                    class="form-control input-md" placeholder="Task one" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only">Task two</label>
+                                                <input type="url" name="task2" id="task2"
+                                                    class="form-control input-md" placeholder="Task two" required>
+                                            </div>
+                                           
 
                                             <button type="submit" class="btn btn-success">Submit Links
                                                 for confirmation</button>
@@ -470,18 +474,18 @@
                         <div class="alert h5-text alert-success">
 
                             You can only withdraw on Saturdays. <br>
-                            Withdrawals would be processed through Saturday, Sunday. Latest Monday, You will receive the
+                            Payments would be processed through Saturday, Sunday. Latest Monday, You will receive the
                             alert.
 
                         </div>
                     </div>
                     <hr>
-                    <div class="container pt-5">
+                    <!-- <div class="container pt-5">
                         <div class="col-sm-6 withdrawss">
                             <h4 class="cplan">BALANCE</h4>
                             <h4 class="amount"><span id="dashBalance"></span> <span></span></h4>
                         </div>
-                    </div>
+                    </div> -->
 
 
 
@@ -494,8 +498,9 @@
 
                                 <form action="/withdraw" method="POST" id="form">
                                     <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" name="username" id="username" class="form-control input-md"
+                                        <label class="d-none">Username</label>
+                                        <input type="text" name="username" id="username"
+                                            class="form-control d-none input-md"
                                             tabindex="1" value="<%= username %>" required>
                                     </div>
                                     <div class="form-group">
@@ -525,7 +530,7 @@
 
 
 
-                            <div class="col-md-12 p-3">
+                            <!-- <div class="col-md-12 p-3">
 
                                 <h3>Withdrawal History</h3>
                                 <div class="table-responsive-sm">
@@ -549,10 +554,10 @@
                                     </table>
                                 </div>
 
-                                <!-- divider -->
+                            divider 
 
-                                <!-- end divider -->
-                            </div>
+                                end divider
+                            </div> -->
 
 
                         </div>

@@ -178,59 +178,58 @@
                       overflow: auto;
                   }
             } */
+
         </style>
     </head>
 
     <body>
-        <nav class="shadow-sm">
-            <a class="imgnone" href="index.html">
-                <img src="img/TweetWallet green.jpg" width="200" height="50" alt="">
-            </a>
+         <nav class="shadow-sm">
+             <a class="imgnone" href="index.html">
+                 <img src="img/TweetWallet green.jpg" width="200" height="50" alt="">
+             </a>
 
-            <ul>
-                <li class="nav-item navigation current" data-tab="tab-1">
-                    <a class="nav-link link-text text-ref text-muted" href="admin"><span><i
-                                class="fas fa-rocket"></i></span> All Users</a>
-                </li>
-                <li class="nav-item navigation" data-tab="tab-2">
-                    <a class="nav-link link-text text-ref text-muted" href="admin/withdrawal"><span><i
-                                class="fas fa-life-ring"></i></span> Withdrawal</a>
-                </li>
-                <li class="nav-item navigation" data-tab="tab-3">
-                    <a class="nav-link link-text text-ref text-muted" href="admin/task"><span><i
-                                class="fas fa-money-check"></i></span> Tasks</a>
-                </li>
-            </ul>
-        </nav>
+             <ul>
+                 <li class="nav-item navigation" data-tab="tab-1">
+                     <a class="nav-link link-text text-ref text-muted" href="/admin"><span><i
+                                 class="fas fa-rocket"></i></span> All Users</a>
+                 </li>
+                 <li class="nav-item navigation current" data-tab="tab-2">
+                     <a class="nav-link link-text text-ref text-muted" href="/admin/withdrawal"><span><i
+                                 class="fas fa-life-ring"></i></span> Withdrawal</a>
+                 </li>
+                 <li class="nav-item navigation" data-tab="tab-3">
+                     <a class="nav-link link-text text-ref text-muted" href="/admin/task"><span><i
+                                 class="fas fa-money-check"></i></span> Tasks</a>
+                 </li>
+             </ul>
+         </nav>
         <div class="container mt-3">
             <div class="col-md-12 pb-5">
                 <div class="col-12">
-                    <h4 class="text-center p-3">All Users</h4>
+                    <h4 class="text-center p-3">Withdrawal</h4>
                 </div>
                 <div>
-                    <input type="text" id="searchBar" class="form-control" placeholder="Seach for User">
+                    <input type="text" class="form-control" placeholder="Seach for User">
                 </div>
                 <div class="table-responsive text-nowrap mt-3">
                     <table class="table">
                         <thead>
                             <tr>
-
+                               
                                 <th scope="Status">Username</th>
                                 <th scope="Date">Bank account</th>
                                 <th scope="Date">Account number</th>
-                                <th scope="Date">Phone Number</th>
-                                <th scope="Date">Date Registered</th>
+                                <th scope="Date">Amount withdrawn</th>
                             </tr>
                         </thead>
-                        <tbody id="tableBody">
+                        <tbody>
 
                             <% data.filter(function(item){ %>
-                            <tr class="tableRow">
+                            <tr>
                                 <td><%= item.username %></td>
                                 <td><%= item.accountbank %></td>
                                 <td><%= item.accountnumber %></td>
-                                <td><%= item.number %></td>
-                                <td><%= item.date %></td>
+                                <td><%= item.amountwithdraw %></td>
                             </tr>
                             <% }); %>
 
@@ -239,6 +238,4 @@
                 </div>
             </div>
         </div>
-        <script src="js/dashboard.js"></script>
     </body>
-</html>

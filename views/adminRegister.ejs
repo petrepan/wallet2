@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Tweet wallet | Login</title>
+        <title>Tweet wallet</title>
 
         <!-- Bootstrap core CSS -->
         <link href="/css/bootstrap.min.css" rel="stylesheet"
@@ -14,7 +14,6 @@
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/314d085fdf.js" crossorigin="anonymous"></script>
         <!-- Favicons -->
-
 
 
         <style>
@@ -35,6 +34,10 @@
 
             .navbar-toggler {
                 background-color: #309030 !important;
+            }
+
+            body {
+                background-color: #eafbea;
             }
 
             .jumbotron {
@@ -69,38 +72,51 @@
                 .h5-text {
                     font-size: 14px;
                 }
+
+                .h4 {
+                    font-size: 20px !important;
+                }
             }
         </style>
     </head>
     <body class="text-center">
-        <form action="/users/login" method="POST" class="pt-5 needs-validation" novalidate>
-            <div class="container d-flex pt-5 justify-content-center">
-                <div class="">
-                    <a href="/"><img class="mb-4" src="/img/TweetWallet green.jpg" alt="logo" width="220"
-                            height="50"></a>
-                            <%- include('partials/messages') %>
-                    <h1 class="h4 mb-4 font-weight-normal">Login to your dashboard</h1>
-                    <div class="mb-3 mt-3">
-                        <label for="username" class="sr-only">Twitter handle</label>
-                        <input type="text" name="username" id="username" class="form-control" placeholder="Twitter handle" required=""
-                            autofocus="">
-                    </div>
-                    <div class="mb-1 mb-2">
-                        <label for="inputPassword" class="sr-only">Password</label>
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Password"
-                            required="">
-                    </div>
-                    <div class="checkbox mb-3 d-flex h5-text justify-content-between">
-                        <div>
-                            <a href="">Forgot your password?</a>
+
+        <form action="/admin/register" method="POST" class="pt-4 needs-validation" novalidate>
+            <div class="container w-100 d-flex pt-5 justify-content-center">
+                <div class="w-75">
+                    <h1 class="h4 mb-4 text-left text-secondary font-weight-bold">Let's get you started with your
+                        Tweetwallet
+                        account</h1>
+                    <div>
+                        <%- include('partials/messages') %>
+                        <div class="row">
+                                <div class="text-left mb-3">
+                                    <label class="m-0" for="username">Admin</label>
+                                    <input type="text" name="admin" class="form-control" id="admin"
+                                        placeholder="Admin"
+                                        value="<%= typeof admin != 'undefined' ? admin : '' %>" required>
+                                </div>
+                            </div>
+                
+
+
+                        <div class="mb-3 text-left">
+                            <label class="m-0" for="password">Password</label>
+                            <input type="password" name="password" id="inputPassword"
+                                value="<%= typeof password != 'undefined' ? password : '' %>" class="form-control"
+                                placeholder="Password" required="">
                         </div>
+
+
                     </div>
-                    <button class="btn btn-lg h5-text btn-success btn-block" type="submit">Login to your
-                        dashboard</button>
-                    <p class="mb-3 h5-text">Don't have a Tweetwallet account? <a href="/users/register">Sign up</a></p>
+                    <button class="btn m-3 btn-success h5-text" type="submit">Get started</button>
+
                 </div>
             </div>
         </form>
+        <p class="lead mb-3 pb-5">
+            Have an account? <a href="/users/login">Login</a>
+        </p>
 
         <script>
             // Example starter JavaScript for disabling form submissions if there are invalid fields

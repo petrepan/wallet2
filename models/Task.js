@@ -2,14 +2,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const taskSchema = new Schema({
-  files: {
+  task1: {
     type: String,
   },
   username: {
     type: String,
   },
-  fileID: {
-    type: Schema.Types.ObjectId,
+  task2: {
+    type: String,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   },
 });
 
