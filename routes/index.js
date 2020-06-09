@@ -144,7 +144,7 @@ router.post("/plan", (req, res) => {
        .then((plan) => {
          if (plan) {
            //user exist
-           errors.push({ msg: "You can't suscribe twice on free plan" });
+           errors.push({ msg: "You can't suscribe twice on free plan, choose one of the other plans" });
            res.render("./dashboard", {
              errors,
              username,
@@ -163,7 +163,7 @@ router.post("/plan", (req, res) => {
              .then((result) => {
                console.log(result);
                console.log(`successful${freeplan}`);
-               req.flash("success_msg", "Free Plan activated");
+               req.flash("success_msg", "Free Plan activated, You can now start posting your task on twitter");
                res.redirect("/dashboard");
              })
              .catch((err) => console.log(err));
@@ -266,6 +266,12 @@ router.get("/admin", ensureAdminAuthenticated, (req, res) => {
 router.get("/admin/task", ensureAdminAuthenticated, (req, res) => {
   Task.find({}, (err, data) => {
     res.render("adminTask", { data: data });
+  });
+});
+
+router.get("/admin/freeplan", ensureAdminAuthenticated, (req, res) => {
+  Plan.find({}, (err, data) => {
+    res.render("adminFreeUsers", { data: data });
   });
 });
 

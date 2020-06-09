@@ -220,8 +220,7 @@
                             <tr>
 
                                 <th scope="Status">Username</th>
-                                <th scope="Date">Task One</th>
-                                <th scope="Date">Task two</th>
+                                <th scope="Status">Plan</th>
                                 <th scope="Date">Date</th>
                             </tr>
                         </thead>
@@ -230,8 +229,7 @@
                             <% data.filter(function(item){ %>
                             <tr>
                                 <td><%= item.username %></td>
-                                <td><%= item.task1 %></td>
-                                <td><%= item.task2 %></td>
+                                <td><%= item.freeplan %></td>
                                 <td><%= item.date %></td>
                             </tr>
                             <% }); %>
