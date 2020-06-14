@@ -16,50 +16,9 @@ const app = express();
 //passport config 
 require("./config/passport")(passport);
 
-// const Task = require("./models/Task");
-
-//db config
-// const db = require('./config/keys').MongoURI;
-
 const mongoURI = "mongodb+srv://peter123:petrepan1234@cluster0-nr9jq.mongodb.net/test?retryWrites=true&w=majority"; 
 
 const mongoDB = process.env.mongoDB_URI || mongoURI;
-
-// const conn = mongoose.createConnection(mongoURI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-
-// let gfs;
-
-// conn.once("open", () => {
-//   // Init stream
-//   gfs = Grid(conn.db, mongoose.mongo);
-//   gfs.collection("uploads");
-// });
-
-// // Create storage engine
-// const storage = new GridFsStorage({
-//   url: mongoURI,
-//   file: (req, file) => {
-//     return new Promise((resolve, reject) => {
-//       crypto.randomBytes(16, (err, buf) => {
-//         if (err) {
-//           return reject(err);
-//         }
-//         const filename = buf.toString('hex') + path.extname(file.originalname);
-//         const fileInfo = {
-//           filename: filename,
-//           bucketName: 'uploads'
-//         };
-//         resolve(fileInfo);
-//       });
-//     });
-//   }
-// });
-// const upload = multer({ storage });
-
-
 
 
 //connect to mongo
@@ -102,21 +61,6 @@ app.use((req, res, next) => {
     next();
 })
 
-// app.post("/task", upload.any(), (req, res) => {
-//   // const task = new Task({
-//   //   username: req.body.username,
-//   // })
-//   // task.save().then(result => {
-//   //    console.log(result);
-//   //    req.flash("success_msg", "Task submitted");
-//   //    res.redirect("/dashboard");
-//   // }).catch(err=>console.log(err)) 
-//   console.log(req.body)
-//   console.log("yehah");
-//   req.flash("success_msg", "Task submitted");
-//   // res.json({ file: req.file });
-//   res.redirect("/dashboard");
-// }); 
 
 //Routes
 app.use("/", require("./routes/index"));

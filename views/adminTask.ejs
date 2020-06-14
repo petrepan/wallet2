@@ -212,7 +212,7 @@
                     <h4 class="text-center p-3">Task submission</h4>
                 </div>
                 <div>
-                    <input type="text" class="form-control" placeholder="Seach for User">
+                    <input type="text" id="searchBar" class="form-control" placeholder="Seach for User">
                 </div>
                 <div class="table-responsive text-nowrap mt-3">
                     <table class="table">
@@ -225,11 +225,11 @@
                                 <th scope="Date">Date</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tableBody">
 
                             <% data.filter(function(item){ %>
-                            <tr>
-                                <td><%= item.username %></td>
+                            <tr class="tableRow">
+                                <td class="userName"><%= item.username %></td>
                                 <td><%= item.task1 %></td>
                                 <td><%= item.task2 %></td>
                                 <td><%= item.date %></td>
@@ -241,4 +241,6 @@
                 </div>
             </div>
         </div>
+         <script src="/js/dashboard.js"></script>
     </body>
+</html>

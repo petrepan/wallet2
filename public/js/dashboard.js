@@ -6,16 +6,22 @@
 // }
 
 // taskForm.addEventListener("submit", submitForm)
-// const searchBar = document.getElementById("searchBar");
-// const tableBody = document.getElementById("tableBody");
-// const tableRow = document.querySelectorAll(".tableRow")
+const searchBar = document.getElementById("searchBar");
 
-// let matches = tableRow.forEach(item => console.log(item.children[0].innerText))
-// console.log(matches)
-// const searchInput = (search) => {
-//     for (let i = 0; i <= matches.length; i++){
-//         console.log(i)
-//     }
-// }
 
-// searchBar.addEventListener("input", () => searchInput(searchBar.value))
+function searchAll() {
+    const searchValue = document.getElementById("searchBar").value.toUpperCase();
+    const tableBody = document.getElementById("tableBody");
+    const tableRow = tableBody.querySelectorAll(".tableRow");
+    for (let i = 0; i < tableRow.length; i++){
+        let username = tableRow[i].getElementsByClassName("userName")[0];
+
+        if (username.innerHTML.toUpperCase().indexOf(searchValue) > -1) {
+            tableRow[i].style.display = '';
+        } else { 
+            tableRow[i].style.display = "none";
+        }
+    }
+}
+
+searchBar.addEventListener("input", searchAll)
