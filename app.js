@@ -16,7 +16,7 @@ const app = express();
 //passport config 
 require("./config/passport")(passport);
 
-const mongoURI = require("./config/keys").MongoURI;
+const mongoURI = "mongodb+srv://peter123:petrepan1234@cluster0-nr9jq.mongodb.net/test?retryWrites=true&w=majority";
 
 const mongoDB = process.env.mongoDB_URI || mongoURI;
 
