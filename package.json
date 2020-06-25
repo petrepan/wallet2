@@ -1,7 +1,7 @@
 {
   "name": "TweetWallet",
   "version": "1.0.0",
-  "description": "Make money by advertising products for organisations",
+  "description": "Bridging gaps between influencers and brand",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -9,6 +9,8 @@
   },
   "keywords": [
     "Tweet",
+    "Influencers",
+    "Brands",
     "Advertise",
     "Wallet"
   ],
