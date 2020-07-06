@@ -82,7 +82,7 @@
     </head>
     <body class="text-center">
 
-        <form action="/users/register" method="POST" class="pt-4 needs-validation" novalidate>
+        <form action="/users/register" method="POST" class="pt-4 needs-validation" id="reginfo" novalidate>
             <div class="container w-100 d-flex pt-5 justify-content-center">
                 <div class="w-75">
                     <h1 class="h4 mb-4 text-left text-secondary font-weight-bold">Let's get you started with your
@@ -126,11 +126,11 @@
                                 </div>
                                 <div class="text-left mb-3">
                                     <label class="m-0" for="username">Bank name</label>
-                                    <select id="accountbank" name="accountbank" class="form-control custom-select"
+                                    <select form="reginfo" name="accountbank" class="form-control custom-select"
                                         value="<%= typeof accountbank != 'undefined' ? accountbank : '' %>"
                                         required>
-                                        <option value="" selected="">--Select Bank-- </option>
-                                        <option value="Access Bank"> Access Bank</option>
+                                        <option value="V Bank" selected="">--V Bank-- </option>
+                                        <!-- <option value="Access Bank"> Access Bank</option>
 
                                         <option value="Access Bank (Diamond)"> Access Bank (Diamond)</option>
 
@@ -196,13 +196,18 @@
 
                                         <option value="Wema Bank"> Wema Bank</option>
 
-                                        <option value="Zenith Bank"> Zenith Bank</option>
+                                        <option value="Zenith Bank"> Zenith Bank</option> -->
                                     </select>
                                 </div>
 
                             </div>
                         </div>
-
+                         <div class="mb-3 text-left">
+                             <label class="m-0" for="email">Email</label>
+                             <input type="email" name="email" id="inputemail"
+                                 value="<%= typeof email != 'undefined' ? email : '' %>" class="form-control"
+                                 placeholder="Email Address" required="">
+                         </div>
                         <div class="mb-3 text-left">
                             <label class="m-0" for="password">Password</label>
                             <input type="password" name="password" id="inputPassword"

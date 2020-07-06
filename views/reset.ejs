@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Tweet wallet | Login</title>
+        <title>Tweet wallet | Reset</title>
 
         <!-- Bootstrap core CSS -->
         <link href="/css/bootstrap.min.css" rel="stylesheet"
@@ -73,31 +73,25 @@
         </style>
     </head>
     <body class="text-center">
-        <form action="/users/login" method="POST" class="pt-5 needs-validation" novalidate>
+        <form action="" method="POST" class="pt-5 needs-validation" novalidate>
             <div class="container d-flex pt-5 justify-content-center">
                 <div class="">
                     <a href="/"><img class="mb-4" src="/img/TweetWallet green.jpg" alt="logo" width="220"
                             height="50"></a>
-                            <%- include('partials/messages') %>
-                    <h1 class="h4 mb-4 font-weight-normal">Login to your dashboard</h1>
+                    <%- include('partials/messages') %>
+                    <h1 class="h4 mb-4 font-weight-normal">Recover your Password</h1>
                     <div class="mb-3 mt-3">
-                        <label for="username" class="sr-only">Twitter handle</label>
-                        <input type="text" name="username" id="username" class="form-control" placeholder="Twitter handle" required=""
-                            autofocus="">
+                        <label for="password" class="sr-only">Password</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="New Password"
+                            required="" autofocus="">
                     </div>
-                    <div class="mb-1 mb-2">
-                        <label for="inputPassword" class="sr-only">Password</label>
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Password"
-                            required="">
-                    </div>
-                    <div class="checkbox mb-3 d-flex h5-text justify-content-between">
-                        <div>
-                            <a href="/password">Forgot your password?</a>
-                        </div>
-                    </div>
-                    <button class="btn btn-lg h5-text btn-success btn-block" type="submit">Login to your
-                        dashboard</button>
-                    <p class="mb-3 h5-text">Don't have a Tweetwallet account? <a href="/users/register">Sign up</a></p>
+                     <div class="mb-3 mt-3">
+                         <label for="password" class="sr-only">Confirm Password</label>
+                         <input type="password" name="password" id="password" class="form-control" placeholder="Confirm Password"
+                             required="" autofocus="">
+                     </div>
+
+                    <button class="btn btn-lg h5-text btn-success btn-block" type="submit">Update Password</button>
                 </div>
             </div>
         </form>

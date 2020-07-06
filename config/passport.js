@@ -113,45 +113,6 @@ passport.deserializeUser(function (sessionConstructor, done) {
     );
   }
 }); 
-
-
-
- 
-//   passport.serializeUser(function(user, done) { 
-//   var key = {
-//     id: user.id,
-//     type: user.userType
-//   }
-//   done(null, key);
-// })
-// passport.deserializeUser(function(key, done) {
-//   // this could be more complex with a switch or if statements
-//   var Model = key.type === 'type1' ? User : Admin;  
-//   Model.findOne({
-//     _id: key.id
-//   }, '-salt -password', function(err, user) {
-//     done(err, user);  
-//   })
-// })
-
-//   passport.serializeUser(function (user, done) {
-//     if (isUser(user)) {
-//       done(null, "user_" + user.id);
-//     } else if (isAdmin(user)) {
-//          done(null, "manager_" + user.id);
-//  }
- 
-//   });
-
-//   passport.deserializeUser(function(id, done) {
-//     User.findById(id, function(err, user) {
-//       done(err, user);
-//     });
-//   });
-  
-//    passport.deserializeUser(function (id, done) {
-//      Admin.findById(id, function (err, user) {
-//        done(err, user);
-//      });
-//    });
 };
+
+

@@ -25,6 +25,7 @@ router.post("/register", (req, res) => {
     accountname,
     accountnumber,
     accountbank,
+    email,
     password,
     password2,
   } = req.body;
@@ -91,6 +92,7 @@ router.post("/register", (req, res) => {
                   accountname,
                   accountnumber,
                   accountbank,
+                  email,
                   password,
                 });
                 //hash password

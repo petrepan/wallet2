@@ -26,10 +26,15 @@ const UserSchema = new mongoose.Schema({
   accountbank: {
     type: String,
   },
+  email: {
+    type: String,
+  },
   dashboard: { type: mongoose.Schema.Types.ObjectId, ref: "Withdraw" },
   password: {
     type: String,
   },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
   date: {
     type: Date,
     default: Date.now,

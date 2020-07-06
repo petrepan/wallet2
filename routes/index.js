@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
+var nodemailer = require("nodemailer");
+var LocalStrategy = require("passport-local").Strategy;
+var async = require("async");
+var crypto = require("crypto");
 const { ensureAuthenticated } = require("../config/auth")
 const { ensureAdminAuthenticated } = require("../config/adminauth");
 
@@ -10,7 +14,7 @@ const Withdraw = require("../models/Withdraw");
 const Task = require("../models/Task");
 const Plan = require("../models/Plan");
 const Admin = require("../models/Admin");
-
+const Planmercury = require("../models/Planmercury")
 
 //home page
 router.get('/', (req, res) => 
@@ -18,69 +22,58 @@ router.get('/', (req, res) =>
 );
 
 //profile
-router.get("/profile", ensureAuthenticated, (req, res) =>
-  res.render("profile", {
-    username: req.user.username,
-    fullname: req.user.fullname,
-    number: req.user.number,
-    username: req.user.username,
-    accountname: req.user.accountname,
-    accountnumber: req.user.accountnumber,
-    accountbank: req.user.accountbank,
-    
-  })
+router.get("/profile", ensureAuthenticated, (req, res) =>{
+    res.render("profile", {
+      username: req.user.username,
+      fullname: req.user.fullname,
+      number: req.user.number,
+      username: req.user.username,
+      accountname: req.user.accountname,
+      accountnumber: req.user.accountnumber,
+      accountbank: req.user.accountbank,
+    });
+  console.log(req.user) 
+}
+
 );
 
-// router.put("/profile", (req, res, next) => {
-//   let newProfile = new User({
-//     username: req.body.username,
-//     fullname: req.body.fullname,
-//     accountbank: req.body.accountbank,
-//     accountname: req.body.accountname,
-//     accountnumber: req.body.accountnumber,
-//     number: req.body.number
-//   })
+// router.put("/profileup", (req, res, next) => {
 
-//   User.findOneAndUpdate({ username }, newProfile, (err, profile) => {
-//     if (err) {
-//       res.render("/profile", {
-//         success: false, msg: "Failed to update"
-//       })
-//     } else {
-//       newProfile.save().then(user => {
-//          res.redirect("/dashboard", {
-//            newProfile,
-//            success: true,
-//            msg: "Profile Updated",
-//          });
+//   User.findByIdAndUpdate({ _id: req.body.id }, req.body, {
+//     useFindAndModify: false}).then(function () {
+//     User.findOne({ _id: req.user.id }).then(function (user) {
+//       if (user) {
+//         console.log(user);
+//         req.flash("success_msg", "Profile Updated");
+//         res.redirect("/dashboard");
 //       }
-       
-//       );
-   
-//     }
-//   })
+//     });
+//   });
       
 // })
 
-// router.get("/profile/:username", ensureAuthenticated, (req, res) =>
-//   res.render("profile", {
-//     username: req.query.username,
-//     fullname: req.query.fullname,
-//     number: req.query.number,
-//     username: req.query.username,
-//     accountname: req.query.accountname,
-//     accountnumber: req.query.accountnumber,
-//     accountbank: req.query.accountbank,
-//   })
-// );
+// router.put("/profileup", (req, res, next) => {
 
+//     User.updateOne({ _id: req.user.id }, req.body, function (user) {
+//       if (user) {
+//         console.log(user);
+//         req.flash("success_msg", "Profile Updated");
+//         res.render("/dashboard");
+//       }
+//     });
+//   });
+
+
+ 
 //dashboard
-router.get("/dashboard", ensureAuthenticated, (req, res) =>
+router.get("/dashboard", ensureAuthenticated, (req, res) => {
   res.render("dashboard", {
     username: req.user.username,
     accountnumber: req.user.accountnumber,
-    accountbank: req.user.accountbank
-  })
+    accountbank: req.user.accountbank,
+  });
+  console.log(req.user) 
+}
 );
 
 router.post("/withdraw", (req, res) => {
@@ -135,29 +128,56 @@ router.post("/task", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.post("/plan", (req, res) => {
-  const { freeplan, username, accountnumber, accountbank } = req.body;
+//whatsapp
+router.post(
+  "/planmercury",
+ (req, res) => {
+    const { mercury, username, accountnumber, accountbank } = req.body;
+
+    const planmercury = new Planmercury({
+      username,
+      mercury,
+      accountnumber,
+      accountbank,
+    });
+
+    planmercury
+      .save()
+      .then((result) => {
+        console.log(result);
+        console.log(`successful${mercury}`);
+        req.flash("success_msg", "Subscription successful");
+        res.redirect("/dashboard");
+      })
+      .catch((err) => console.log(err));
+  }
+);
+
+router.post("/freeplan", (req, res) => {
+  const { freeplan, mercury, username, accountnumber, accountbank } = req.body;
 
   let errors = [];
 
      Plan.findOne({ username: username })
        .then((plan) => {
+         console.log(req.body)
          if (plan) {
            //user exist
-           errors.push({ msg: "You can't suscribe twice on free plan, choose one of the other plans" });
+           console.log(`unsuccessful${freeplan}`);
+           errors.push({ msg: "Your free plan is expired, choose one of the other plans" });
            res.render("dashboard", {
              errors,
              username,
              freeplan,
              accountnumber,
-             accountbank
+             accountbank, 
            });
          } else {
-           const plan = new Plan({
+           const plan = new Plan({ 
              freeplan,
              username,
              accountnumber,
-             accountbank
+             accountbank,
            });
            //free plan
 
@@ -277,5 +297,160 @@ router.get("/admin/freeplan", ensureAdminAuthenticated, (req, res) => {
     res.render("adminFreeUsers", { data: data });
   });
 });
+
+
+router.get("/password", function (req, res) {
+  res.render("password", {
+    user: req.user
+  })
+})
+
+
+router.post("/forgot", function (req, res, next) {
+  async.waterfall(
+    [
+      function (done) {
+        crypto.randomBytes(20, function (err, buf) {
+          var token = buf.toString("hex");
+          done(err, token);
+        });
+      },
+      function (token, done) {
+        User.findOne({ email: req.body.email }, function (err, user) {
+          if (!user) {
+            req.flash("error", "No account with that email address exists.");
+            return res.redirect("/password");
+          }
+
+          user.resetPasswordToken = token;
+          user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+          user.save(function (err) { 
+            done(err, token, user);
+          });
+        });
+      },
+      function (token, user, done) {
+        let transporter = nodemailer.createTransport({
+          pool: true,
+          host: "smtp.privateemail.com",
+          port: 465,
+          secure: true,
+          auth: {
+            user: "admin@tweetwallet.co",
+            pass: "tweetwalletadminplnja",
+          },
+        });
+        let mailOptions = {
+          to: user.email,
+          from: "admin@tweetwallet.co",
+          subject: "Tweetwallet Password Reset",
+          text:
+            "You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n" +
+            "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
+            "http://" +
+            req.headers.host +
+            "/reset/" +
+            token + 
+            "\n\n" +
+            "If you did not request this, please ignore this email and your password will remain unchanged.\n",
+        };
+        transporter.sendMail(mailOptions, function (err) {
+          req.flash(
+            "success_msg",
+            "An e-mail has been sent to " +
+              user.email +
+              " with further instructions."
+          );
+          done(err, "done");
+        });
+      },
+    ],
+    function (err) {
+      if (err) return next(err);
+      res.redirect("/password");
+    }
+  );
+});
+
+router.get("/reset/:token", function (req, res) {
+  User.findOne(
+    {
+      resetPasswordToken: req.params.token,
+      resetPasswordExpires: { $gt: Date.now() },
+    },
+    function (err, user) {
+      if (!user) {
+        req.flash("error", "Password reset token is invalid or has expired.");
+        return res.redirect("/forgot");
+      }
+      res.render("reset", {
+        user: req.user,
+      });
+    }
+  );
+});
+ 
+router.post("/reset/:token", function (req, res) {
+  async.waterfall(
+    [ 
+      function (done) {
+        User.findOne(
+          {
+            resetPasswordToken: req.params.token,
+            resetPasswordExpires: { $gt: Date.now() },
+          },
+          function (err, user) {
+            if (!user) {
+              req.flash(
+                "error",
+                "Password reset token is invalid or has expired."
+              );
+              return res.redirect("back");
+            }
+
+            user.password = req.user.password;
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
+
+            user.save(function (err) { 
+              req.logIn(user, function (err) { 
+                done(err, user);
+              });
+            });
+          }
+        );
+      },
+      function (user, done) {
+          let transporter = nodemailer.createTransport({
+            pool: true,
+            host: "smtp.privateemail.com",
+            port: 465,
+            secure: true,
+            auth: {
+              user: "admin@tweetwallet.co",
+              pass: "tweetwalletadminplnja",
+            },
+          });
+        let mailOptions = { 
+          to: user.email,
+          from: "admin@tweetwallet.co",
+          subject: "Your password has been changed",
+          text:
+            "Hello,\n\n" +
+            "This is a confirmation that the password for your account has just been changed.\n", 
+        };
+        transporter.sendMail(mailOptions, function (err) {
+          req.flash("success_msg", "Success! Your password has been changed.");
+          done(err);
+        });
+      },
+    ],
+    function (err) {  
+      res.redirect("/dashboard");
+    }
+  );
+});
+
 
 module.exports = router;

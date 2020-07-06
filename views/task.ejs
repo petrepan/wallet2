@@ -178,7 +178,6 @@
                       overflow: auto;
                   }
             } */
-
         </style>
     </head>
     <body>
@@ -214,119 +213,6 @@
                         </i></a>
                 </header>
                 <%- include('partials/messages') %>
-
-
-                <!--CHOOSE A PLAN-->
-                <div id="tab-1" class="tab-content pb-5 mb-5 current">
-                    <h5 class="pl-1 text-muted text-uppercase">Choose a plan</h5>
-                    <div class="row mb-4">
-
-                        <div class="col-sm-6">
-                            <div class="card bg-light  mb-3">
-                                <form action="/freeplan" method="POST">
-                                <div class="card-header font-weight-bold plan" data-plan="Free">Free Trial(3days only)
-                                </div>
-                                <div class="card-body card-paragraph">
-                                    <h5 class="card-title">Fee: Free</h5>
-                                    <p class="card-text"><span class="">Task/Target:</span> 30 Retweets
-                                    </p>
-                                    <p class="card-text"><span class="">Daily Revenue:</span> 100 Naira
-                                    </p>
-                                    <input type="text" name="username" value="<%= username %>" class="d-none">
-                                    <input type="text" name="accountnumber" value="<%= accountnumber %>" class="d-none">
-                                    <input type="text" name="accountbank" value="<%= accountbank %>" class="d-none">
-                                    <input type="text" name="freeplan" value="freeplan" class="d-none">
-                                     <input type="text" name="mercury" value="2500" class="d-none">
-                                    <button class="btn card-paragraph btn-success planbtn">Suscribe</button>
-                                    
-                                </div>
-                                </form>
-
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card bg-secondary  mb-3">
-                                <form target="_blank" action="/planmercury" method="post">
-                                <div class="card-header font-weight-bold plan" data-plan="Mercury">Mercury</div>
-                                <div class="card-body card-paragraph">
-                                    <h5 class="card-title">Fee: 2,500 Naira</h5>
-                                    <p class="card-text"><span class="">Task/Target:</span> 20 Retweets
-                                    </p>
-                                    <p class="card-text"><span class="">Daily Revenue:</span> 150 Naira
-                                    </p>
-                                    <input type="text" name="username" value="<%= username %>" class="d-none">
-                                    <input type="text" name="accountnumber" value="<%= accountnumber %>" class="d-none">
-                                    <input type="text" name="accountbank" value="<%= accountbank %>" class="d-none">
-                                    <input type="text" name="mercury" value="2500" class="d-none">
-                                    <input
-                                        onclick="window.location.href = 'https://wa.me/+2348101211029?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20MERCURY%20plan';"
-                                        type="submit" class="btn card-paragraph btn-success planbtn" value="Suscribe">
-                                    <!-- <a href="https://wa.me/+2348101211029?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20
-                                        MERCURY%20plan" class="btn card-paragraph btn-warning planbtn">Subscribe</a> -->
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card bg-info  mb-3">
-                                <div class="card-header font-weight-bold plan" data-plan="Venus">Venus</div>
-                                <div class="card-body card-paragraph">
-                                    <h5 class="card-title">Fee: 5,000 Naira</h5>
-                                    <p class="card-text"><span class="">Task/Target:</span> 15 Retweets
-                                    </p>
-                                    <p class="card-text"><span class="">Daily Revenue:</span> 300 Naira
-                                    </p>
-                                    <a href="https://wa.me/+2348101211029?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20
-                                        VENUS%20plan" class="btn card-paragraph btn-primary planbtn">Subscribe</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card bg-primary mb-3">
-                                <div class="card-header font-weight-bold plan" data-plan="Earth">Earth</div>
-                                <div class="card-body card-paragraph">
-                                    <h5 class="card-title">Fee: 10,000 Naira</h5>
-                                    <p class="card-text"><span class="">Task/Target:</span> 10 Retweets
-                                    </p>
-                                    <p class="card-text"><span class="">Daily Revenue:</span> 600 Naira
-                                    </p>
-                                    <a href="https://wa.me/+2348101211029?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20
-                                        EARTH%20plan" class="btn card-paragraph btn-info planbtn">Subscribe</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card bg-warning mb-3">
-                                <div class="card-header font-weight-bold plan" data-plan="Mars">Mars</div>
-                                <div class="card-body card-paragraph">
-                                    <h5 class="card-title">Fee: 30,000</h5>
-                                    <p class="card-text"><span class="">Task/Target:</span> 5 Retweets
-                                    </p>
-                                    <p class="card-text"><span class="">Daily Revenue:</span> 1800 Naira
-                                    </p>
-                                    <a href="https://wa.me/+2348101211029?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20
-                                        MARS%20plan" class="btn card-paragraph btn-secondary planbtn">Subscribe</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card bg-success mb-3">
-                                <div class="card-header font-weight-bold plan" data-plan="Sun">Sun</div>
-                                <div class="card-body card-paragraph">
-                                    <h5 class="card-title">Fee: 60,000 Naira</h5>
-                                    <p class="card-text"><span class="">Task/Target:</span> 3 Retweets
-                                    </p>
-                                    <p class="card-text"><span class="">Daily Revenue:</span> 3600 Naira
-                                    </p>
-                                    <a href="https://wa.me/+2348101211029?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20
-                                        SUN%20plan" class="btn card-paragraph btn-light planbtn">Subscribe</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
                 <!--OVERVIEW-->
 
                 <div id="tab-2" class="tab-content pb-5 mb-5">
@@ -400,7 +286,7 @@
 
                                 </div>
                             </div>
-                             <!-- <div class="col-12 mb-0 task">
+                            <!-- <div class="col-12 mb-0 task">
                                  <div class="alert alert-dismissible font-weight-lighter alert-danger mt-2">
 
                                      You haven't submitted any task today
@@ -415,19 +301,20 @@
                                             <div class="form-group">
                                                 <label class="d-none">Username</label>
                                                 <input type="text" name="username" id="username"
-                                                    class="form-control input-md d-none" value="<%= username %>" required>
+                                                    class="form-control input-md d-none" value="<%= username %>"
+                                                    required>
                                             </div>
                                             <div class="form-group">
                                                 <label class="sr-only">Task one</label>
-                                                <input type="url" name="task1" id="task1"
-                                                    class="form-control input-md" placeholder="Task one" required>
+                                                <input type="url" name="task1" id="task1" class="form-control input-md"
+                                                    placeholder="Task one" required>
                                             </div>
                                             <div class="form-group">
                                                 <label class="sr-only">Task two</label>
-                                                <input type="url" name="task2" id="task2"
-                                                    class="form-control input-md" placeholder="Task two" required>
+                                                <input type="url" name="task2" id="task2" class="form-control input-md"
+                                                    placeholder="Task two" required>
                                             </div>
-                                           
+
 
                                             <button type="submit" class="btn btn-success">Submit Links
                                                 for confirmation</button>
@@ -476,107 +363,6 @@
                             </div> -->
                         </div>
                     </div>
-                </div>
-
-                <!--WITHDRAWAL-->
-
-
-                <div id="tab-3" class="tab-content pb-5">
-                    <h3 class="todaytask">Withdraw Funds</h3>
-                    <div class="col-12 mt-3">
-                        <h6 class="text-muted m-0">INFO</h6>
-                        <div class="alert h5-text alert-success">
-
-                            You can only withdraw on Saturdays. <br>
-                            Payments would be processed through Saturday, Sunday. Latest Monday, You will receive the
-                            alert.
-
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- <div class="container pt-5">
-                        <div class="col-sm-6 withdrawss">
-                            <h4 class="cplan">BALANCE</h4>
-                            <h4 class="amount"><span id="dashBalance"></span> <span></span></h4>
-                        </div>
-                    </div> -->
-
-
-
-
-                    <div class="container pt-3 mb-5">
-                        <div class="row">
-                            <div class="col-md-6">
-
-                                <div id="result"></div>
-
-                                <form action="/withdraw" method="POST" id="form">
-                                    <div class="form-group">
-                                        <label class="d-none">Username</label>
-                                        <input type="text" name="username" id="username"
-                                            class="form-control d-none input-md"
-                                            tabindex="1" value="<%= username %>" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Withdrawal Amount (₦)</label>
-                                        <input type="number" name="amountwithdraw" id="amountWithdraw"
-                                            class="form-control input-md" tabindex="1" required="">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Bank Account Number</label>
-                                        <input type="number" name="accountnumber" id="accountnumber"
-                                            class="form-control input-md" tabindex="1" value="<%= accountnumber %>"
-                                            required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Bank</label>
-                                        <input type="text" id="amount" class="form-control input-md" name="accountbank"
-                                            value="<%= accountbank %>" tabindex="1" required>
-                                    </div>
-
-                                    <button type="submit" id="submitBtn" class="btn bg-success text-light">Make
-                                        Withdrawal</button>
-                                    <br><br>
-                                </form>
-                            </div>
-
-
-
-                            <!-- <div class="col-md-12 p-3">
-
-                                <h3>Withdrawal History</h3>
-                                <div class="table-responsive-sm">
-                                    <table class="table">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Amount</th>
-                                                <th scope="col">Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td scope="row" colspan="4" class="text-center"><strong>No
-                                                        Withdrawals
-                                                        yet!</strong>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            divider 
-
-                                end divider
-                            </div> -->
-
-
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </main>

@@ -10,6 +10,8 @@ const passport = require("passport")
 // const multer = require("multer");
 // const GridFsStorage = require("multer-gridfs-storage");
 // const Grid = require("gridfs-stream");
+const methodOverride = require("method-override");
+
 
 const app = express();
 
@@ -33,7 +35,10 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public")); 
 
 //bodyparser
+
 app.use(express.urlencoded({ extended: true }))
+
+app.use(methodOverride("_method"));
 
 //express session
 app.use(
