@@ -333,7 +333,7 @@ router.post("/forgot", function (req, res, next) {
       function (token, user, done) {
         let transporter = nodemailer.createTransport({
           pool: true,
-          host: "smtp.privateemail.com",
+          host: "mail.privateemail.com",
           port: 465,
           secure: true,
           auth: {
@@ -424,7 +424,7 @@ router.post("/reset/:token", function (req, res) {
       function (user, done) {
           let transporter = nodemailer.createTransport({
             pool: true,
-            host: "smtp.privateemail.com",
+            host: "mail.privateemail.com",
             port: 465,
             secure: true,
             auth: {
@@ -447,10 +447,10 @@ router.post("/reset/:token", function (req, res) {
       },
     ],
     function (err) {  
-      res.redirect("/dashboard");
+      res.redirect("/users/login");
     }
   );
 });
 
-
+ 
 module.exports = router;
