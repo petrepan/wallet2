@@ -1,15 +1,9 @@
-const cool = require("cool-ascii-faces");
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
-// const path = require("path");
-// const crypto = require("crypto");
 const mongoose = require("mongoose")
 const flash = require("connect-flash")
 const session = require("express-session")
 const passport = require("passport")
-// const multer = require("multer");
-// const GridFsStorage = require("multer-gridfs-storage");
-// const Grid = require("gridfs-stream");
 const methodOverride = require("method-override");
 
 
@@ -38,7 +32,7 @@ app.use(express.static(__dirname + "/public"));
 
 app.use(express.urlencoded({ extended: true }))
 
-app.use(methodOverride("_method"));
+app.use(methodOverride("newMethod"));
 
 //express session
 app.use(
@@ -70,7 +64,6 @@ app.use((req, res, next) => {
 //Routes
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
-app.get("/cool", (req, res) => res.send(cool()));
 
 
 

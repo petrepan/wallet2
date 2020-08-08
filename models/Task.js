@@ -11,6 +11,24 @@ const taskSchema = new Schema({
   task2: {
     type: String,
   },
+  sub: {
+    type: String,
+  },
+  allowBalance: {
+    type: Boolean,
+    default: false,
+  },
+  plan: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Plan",
+  },
+  withdraw: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "withdraw",
+  },
+  daily: {
+    type: Number,
+  },
   date: {
     type: Date,
     default: Date.now,

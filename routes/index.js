@@ -14,6 +14,7 @@ const Withdraw = require("../models/Withdraw");
 const Task = require("../models/Task");
 const Plan = require("../models/Plan");
 const Admin = require("../models/Admin");
+const Totalfunds = require("../models/Totalfunds");
 const Planmercury = require("../models/Planmercury")
 
 //home page
@@ -32,124 +33,287 @@ router.get("/profile", ensureAuthenticated, (req, res) =>{
       accountnumber: req.user.accountnumber,
       accountbank: req.user.accountbank,
     });
-  console.log(req.user) 
 }
 
 );
-
-// router.put("/profileup", (req, res, next) => {
-
-//   User.findByIdAndUpdate({ _id: req.body.id }, req.body, {
-//     useFindAndModify: false}).then(function () {
-//     User.findOne({ _id: req.user.id }).then(function (user) {
-//       if (user) {
-//         console.log(user);
-//         req.flash("success_msg", "Profile Updated");
-//         res.redirect("/dashboard");
-//       }
-//     });
-//   });
-      
-// })
-
-// router.put("/profileup", (req, res, next) => {
-
-//     User.updateOne({ _id: req.user.id }, req.body, function (user) {
-//       if (user) {
-//         console.log(user);
-//         req.flash("success_msg", "Profile Updated");
-//         res.render("/dashboard");
-//       }
-//     });
-//   });
-
 
  
 //dashboard
 router.get("/dashboard", ensureAuthenticated, (req, res) => {
-  res.render("dashboard", {
-    username: req.user.username,
-    accountnumber: req.user.accountnumber,
-    accountbank: req.user.accountbank,
-  });
-  console.log(req.user) 
-}
+  Plan.find().then(plan => {
+    res.render("dashboard", {
+      user: req.user,
+      plan: plan,
+    });
+    console.log(req.user)
+  })   
+  
+ }  
 );
 
+router.get("/withdraw", ensureAuthenticated, (req, res) => {
+  User.findOne(req.user._id).populate("task totalfunds")
+    .then(user => {
+     function checkTrue(usertask) {
+         let falseDaily = 0;
+         for (let i = 0; i < usertask.length; i++) {
+             if (usertask[i].allowBalance) {
+               falseDaily += usertask[i].daily;
+           }
+         }
+         return falseDaily;
+      }
+
+      // if (user.totalfunds !== undefined) {
+      //       function accbal(bal) {
+      //         let calcbal = 0;
+      //         for (let i = 0; i < bal.length; i++) {
+      //           calcbal += bal.accountbalance;
+      //         }
+      //         return calcbal;
+      //       }
+      // }
+      
+       function accbal(bal) {
+         let calcbal = 0;
+         for (let i = 0; i < bal.length; i++) {
+           if (bal[i].allowBalance) {            
+            calcbal += bal[i].accountbalance;
+           }  
+         }
+         return calcbal;
+      }
+      
+      console.log(accbal(user.totalfunds))
+    
+      if (user.totalfunds !== undefined) {
+         res.render("withdraw", {
+           user: req.user,
+           plan: user.task,
+           total: accbal(user.totalfunds),
+         });
+      } else {  
+         res.render("withdraw", {
+           user: req.user,
+           plan: user.task,
+           total: 0,
+         });
+      }
+
+          
+
+  }).catch(err=> console.log(err))  
+
+  
+})
+
+router.get("/task", ensureAuthenticated, (req, res) => {
+  User.findOne(req.user._id).populate('plan totalfunds').then(user => {
+    console.log(user.totalfunds)
+    if (user.plan !== undefined && user.task !== undefined) {
+       res.render("task", {
+         user: req.user,
+         plan: user.plan,
+         task: user.totalfunds
+       });
+    } else {
+        res.render("task", {
+          user: req.user,
+          plan: null,
+          task: []
+        });
+    }
+     
+  })
+});
+
 router.post("/withdraw", (req, res) => {
-  const {
-    fullname,
-    username,
-    amountwithdraw,
-    accountname,
-    accountnumber,
-    accountbank, 
+  const { username, amountwithdraw, accountname, accountnumber, accountbank, 
   } = req.body;
 
-  const withdraw = new Withdraw({
-    fullname,
-    username,
-    amountwithdraw,
-    accountname,
-    accountnumber,
-    accountbank
-  });
+     const withdraw = new Withdraw({
+       username,
+       amountwithdraw,
+       accountname,
+       accountnumber,
+       accountbank,
+     }); 
+  
+  console.log(withdraw)
 
-  withdraw.save()
-    .then(result => {
-      console.log(result)
-      console.log(`successful${amountwithdraw}`);
-      req.flash("success_msg", "Withdrawal successful");
-      res.redirect('/dashboard')
-    }).catch(err=> console.log(err))
+  User.findOne({ _id: req.user._id }).populate("task totalfunds plan")
+    .then(user => {
+    user.withdraw = withdraw
+
+     function checkTrue(task) {
+        let falseDaily = 0;
+        for (let i = 0; i < task.length; i++) {
+            if (task[i].allowBalance) {
+              falseDaily += task[i].daily;  
+          }
+        }
+        return falseDaily;
+    }
+
+      let errors = [];
+
+      
+      let showbal = -amountwithdraw;
+    
+      let totalbalance = new Totalfunds({
+        accountbalance: showbal,
+        allowBalance: true
+      });
+    
+      
+       function accbal(bal) {
+         let calcbal = 0;
+         for (let i = 0; i < bal.length; i++) {
+           calcbal += bal[i].accountbalance;
+         }
+         return calcbal;
+      }
+      
+      
+
+      function lastfuc() {
+        let poplast = user.totalfunds;
+        let showpop = poplast.pop();
+
+        let calcresult = accbal(poplast);
+        return calcresult 
+      }
+
+     if (Number(amountwithdraw) > lastfuc) {
+       errors.push({msg: "You have an insufficient balance, pay for a new plan or try a lesser amount"})
+      }
+      
+      user.totalfunds.push(totalbalance)
+    
+    if (errors.length > 0) {
+      res.render("withdraw", {
+        errors,
+        user: req.user,
+        plan: user.plan,
+        total: accbal(user.totalfunds), 
+      });  
+    } else {
+      user.save().then((done) => {
+          withdraw 
+            .save()
+            .then((result) => {
+              totalbalance
+                .save()
+                .then((results) => {
+                  req.flash("success_msg", "Withdrawal successfully made");
+                  res.redirect("/withdraw");
+                })
+                .catch((err) => console.log(err));
+            })
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
+    }
+
+  }).catch(err=> console.log(err))
 })
 
 //task
-router.post("/task", (req, res) => {
-  const {
-    username,
-    task1,
-    task2,
-  } = req.body;
+router.post("/task/:id", (req, res) => {
+  const id = req.params.id;
+  const { username, daily, sub, task1, task2 } = req.body;
+  let allowBalance;
+  allowBalance ? false : true;
 
   const task = new Task({
-    username,
-    task1,
-    task2,
+    username, task1, daily, sub, task2, allowBalance
   });
 
-  task.save()
-    .then((result) => {
-      console.log(result);
-      console.log(`successful${task1}`);
-      req.flash("success_msg", "Task Submitted");
-      res.redirect("/dashboard");
-    })
-    .catch((err) => console.log(err));
+  User.findById(id).populate("task totalfunds")
+    .then(user => {  
+    user.task.push(task); 
+
+      function checkTrue(usertask) {
+        let falseDaily;
+        for (let i = 0; i < usertask.length; i++) {
+          // if (usertask[i].allowBalance) {
+          //   falseDaily += usertask[i].daily;
+          // }
+          falseDaily = usertask[i].daily;
+        }
+        return falseDaily;
+      }
+
+      console.log(checkTrue(user.totalfunds))
+
+      const totalfund = new Totalfunds({
+        username,
+        accountbalance: checkTrue(user.task),
+        task1,
+        task2,
+        allowBalance
+      });
+    
+          user.totalfunds.push(totalfund);
+        
+   console.log(user.totalfunds)
+
+     user.save().then(user => {
+      task  
+        .save()
+        .then((result) => {   
+          totalfund.save().then((totall) => {
+            req.flash(
+              "success_msg",
+              "Your Task has been submitted for approval"
+            );
+            res.redirect("/task");
+          })
+              
+        }) 
+        .catch((err) => console.log(err));
+    }).catch((err)=>console.log(err))
+    
+  })
+
 });
 
 //whatsapp
 router.post(
-  "/planmercury",
- (req, res) => {
-    const { mercury, username, accountnumber, accountbank } = req.body;
-
-    const planmercury = new Planmercury({
-      username,
-      mercury,
-      accountnumber,
-      accountbank,
-    });
-
-    planmercury
-      .save()
-      .then((result) => {
-        console.log(result);
-        console.log(`successful${mercury}`);
-        req.flash("success_msg", "Subscription successful");
-        res.redirect("/dashboard");
+  "/subscription/:id", 
+  (req, res) => {
+    const id = req.params.id;
+    console.log(id)
+    const { sub, daily, username, accountnumber, accountbank } = req.body;
+    let allowBalance;
+    allowBalance ? false : true; 
+    
+    User.findById(id).then(user => {
+      const newPlan = new Plan({
+        username : username,
+        sub : sub,
+        daily : daily,
+        allowBalance : allowBalance,
+        accountnumber : accountnumber,
+        accountbank : accountbank,
       })
-      .catch((err) => console.log(err));
+        user.plan = newPlan;
+
+      user.save().then((result) => {
+        console.log(result);
+        console.log(`successful${user.plan.daily}`);
+
+        newPlan.save().then(subplan => {      
+        req.flash(
+          "success_msg",
+          "P.S: Pay the respective Subscription to an agent and start submitting task to earn. "
+        );
+        res.redirect("/dashboard"); 
+        })
+      })
+        .catch((err) => console.log(err)); 
+    }) 
+    
   }
 );
 
@@ -287,10 +451,30 @@ router.get("/admin", ensureAdminAuthenticated, (req, res) => {
 });
 
 router.get("/admin/task", ensureAdminAuthenticated, (req, res) => {
-  Task.find({}, (err, data) => {
+  Totalfunds.find({}, (err, data) => {
+    console.log(data)
     res.render("adminTask", { data: data });
   });
 });
+
+router.post("/taskApprove/:id", (req, res) => {
+  // let allowBalance = true;
+  let allowBalance = !req.body.allowBalance;
+console.log(req.params.id)
+  // let task = new Task({ allowBalance: allowBalance })
+  Totalfunds.findById(req.params.id).then(task => {
+    task.allowBalance = allowBalance;
+    task.save().then(done => {
+      if (task.allowBalance) {
+        req.flash("success_msg", "Task has been successfully approved"); 
+      } else {
+         req.flash("error_msg", "Task has been disapproved"); 
+      }
+      
+      res.redirect('/admin/task')
+    })
+  })
+})
 
 router.get("/admin/freeplan", ensureAdminAuthenticated, (req, res) => {
   Plan.find({}, (err, data) => {
@@ -332,7 +516,6 @@ router.post("/forgot", function (req, res, next) {
       },
       function (token, user, done) {
         let transporter = nodemailer.createTransport({
-          pool: true,
           host: "mail.privateemail.com",
           port: 465,
           secure: true,
@@ -423,7 +606,6 @@ router.post("/reset/:token", function (req, res) {
       },
       function (user, done) {
           let transporter = nodemailer.createTransport({
-            pool: true,
             host: "mail.privateemail.com",
             port: 465,
             secure: true,
@@ -447,7 +629,7 @@ router.post("/reset/:token", function (req, res) {
       },
     ],
     function (err) {  
-      res.redirect("/users/login");
+      res.redirect("/dashboard");
     }
   );
 });

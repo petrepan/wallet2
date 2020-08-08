@@ -112,7 +112,7 @@ router.post("/register", (req, res) => {
         })        
     }
 });
-
+ 
 // Login handle
 router.post("/login", (req, res, next) => {
     passport.authenticate("user", {

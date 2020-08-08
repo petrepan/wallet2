@@ -1,26 +1,34 @@
 const mongoose = require("mongoose");
 
 const withdrawSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
+  username: {
+    type: String,
+  },
+  accountname: {
+    type: String,
+  },
+  accountnumber: {
+    type: String,
+  },
+  accountbank: {
+    type: String,
+  },
   amountwithdraw: {
     type: Number,
     required: true,
   },
-  accountbank: {
-    type: String,
-    required: true,
-  },
-  accountnumber: {
-    type: Number,
-    required: false,
-  },
-  username: {
-    type: String,
-    required: false,
+  task: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "task",
   },
   date: {
     type: Date,
     default: Date.now,
-  }, 
+  },
 });
 
-module.exports = mongoose.model("Withdraw", withdrawSchema);
+module.exports = mongoose.model("withdraw", withdrawSchema);

@@ -1,12 +1,5 @@
 const mongoose = require("mongoose");
 
-const withdrawSchema = new mongoose.Schema({
-  amountwithdraw: {
-    type: Number,
-  },
- useraccount: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-}); 
-
 const UserSchema = new mongoose.Schema({
   fullname: {
     type: String,
@@ -20,6 +13,26 @@ const UserSchema = new mongoose.Schema({
   accountname: {
     type: String,
   },
+  plan: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Plan",
+  },
+  task: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Task",
+    },
+  ],
+  withdraw: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "withdraw",
+  },
+  totalfunds: [
+    {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "totalfunds",
+    }
+  ],
   accountnumber: {
     type: Number,
   },
@@ -29,7 +42,6 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
   },
-  dashboard: { type: mongoose.Schema.Types.ObjectId, ref: "Withdraw" },
   password: {
     type: String,
   },

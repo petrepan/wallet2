@@ -200,13 +200,17 @@
                     <a class="nav-link link-text text-ref text-muted" href="/admin/task"><span><i
                                 class="fas fa-money-check"></i></span> Tasks</a>
                 </li>
-                <li class="nav-item navigation" data-tab="tab-4">
+                <!-- <li class="nav-item navigation" data-tab="tab-4">
                     <a class="nav-link link-text text-ref text-muted" href="/admin/freeplan"><span><i
                                 class="fas fa-money-check"></i></span> Free users</a>
-                </li>
+                </li> -->
             </ul>
         </nav>
+
+      
+
         <div class="container mt-3">
+              <%- include('partials/messages') %>
             <div class="col-md-12 pb-5">
                 <div class="col-12">
                     <h4 class="text-center p-3">Task submission</h4>
@@ -220,6 +224,7 @@
                             <tr>
 
                                 <th scope="Status">Username</th>
+                                <th scope="Status">Task Approved</th>
                                 <th scope="Date">Task One</th>
                                 <th scope="Date">Task two</th>
                                 <th scope="Date">Date</th>
@@ -229,10 +234,34 @@
 
                             <% data.filter(function(item){ %>
                             <tr class="tableRow">
+                                 <% if(item.accountbalance > 0){ %>
                                 <td class="userName"><%= item.username %></td>
-                                <td><%= item.task1 %></td>
-                                <td><%= item.task2 %></td>
+                                  <form action="/taskApprove/<%= item._id %>" method="POST">
+                                      <% if(!item.allowBalance) {%>
+                                      <td>
+                                          <input type="checkbox" name="allowBalance" class="d-none">
+                                          <button type="submit" class="btn btn-danger">
+                                              <!-- <%= item.allowBalance %> --> Awaiting Approval
+                                          </button>
+
+                                      </td>
+                                      <% }else{ %>
+                                      <td>
+                                          <input type="checkbox" name="allowBalance" class="d-none" checked>
+                                          <button type="submit" class="btn btn-success">
+                                              <!-- <%= item.allowBalance %> --> Task Approved
+                                          </button>
+
+                                      </td>
+
+                                      <% } %>
+                                  </form>
+                                <td><a rel="noopener noreferrer" target="_blank" href="<%= item.task1 %>"><%= item.task1 %></a></td>
+                                <td><a href="<%= item.task2 %>" target="_blank"
+                                        rel="noopener noreferrer"><%= item.task2 %></a></td>
                                 <td><%= item.date %></td>
+                              
+                                   <% } %>
                             </tr>
                             <% }); %>
 

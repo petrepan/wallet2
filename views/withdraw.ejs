@@ -68,12 +68,6 @@
                 border-radius: 5px;
             }
 
-            .tab-content {
-                display: none;
-            }
-
-
-
             .current {
                 display: inherit;
             }
@@ -188,16 +182,16 @@
             </a>
 
             <ul>
-                <li class="nav-item navigation current" data-tab="tab-1">
-                    <a class="nav-link link-text text-ref text-muted" href="#"><span><i
+                <li class="nav-item navigation" data-tab="tab-1">
+                    <a class="nav-link link-text text-ref text-muted" href="/dashboard"><span><i
                                 class="fas fa-rocket"></i></span> Choose a plan</a>
                 </li>
                 <li class="nav-item navigation" data-tab="tab-2">
-                    <a class="nav-link link-text text-ref text-muted" href="#"><span><i
+                    <a class="nav-link link-text text-ref text-muted" href="/task"><span><i
                                 class="fas fa-life-ring"></i></span> Overview</a>
                 </li>
-                <li class="nav-item navigation" data-tab="tab-3">
-                    <a class="nav-link link-text text-ref text-muted" href="#"><span><i
+                <li class="nav-item navigation current" data-tab="tab-3">
+                    <a class="nav-link link-text text-ref text-muted" href="/withdraw"><span><i
                                 class="fas fa-money-check"></i></span> Withdraw</a>
                 </li>
             </ul>
@@ -207,7 +201,7 @@
             <div class="container">
                 <header class="row justify-content-between pt-4 pl-3 pr-3 pb-5">
                     <div>
-                        <span class="text-muted">Howdy</span> <span class="username"> <%= username %> &#9995;</span>
+                        <span class="text-muted">Howdy</span> <span class="username"> <%= user.username %> &#9995;</span>
                     </div>
                     <a class="pr-1" href="/profile"><i class="fas text-success fa-user-circle">
 
@@ -219,7 +213,7 @@
                 <!--WITHDRAWAL-->
 
 
-                <div id="tab-3" class="tab-content pb-5">
+                <div id="tab-3" class=" pb-5">
                     <h3 class="todaytask">Withdraw Funds</h3>
                     <div class="col-12 mt-3">
                         <h6 class="text-muted m-0">INFO</h6>
@@ -235,7 +229,18 @@
                     <div class="container pt-5">
                         <div class="col-sm-6 withdrawss">
                             <h4 class="cplan">BALANCE</h4>
-                            <h4 class="amount"><span id="dashBalance"></span> <span></span></h4>
+                            <h4 class="amount">
+
+                                <% if(plan === null){ %>
+                                <span id="dashBalance"> 0</span> <span></span>
+                                <% } else { %>
+                                  <span id="dashBalance"> <%= total %></span> <span></span>
+                                <% } %>
+
+                               
+                                
+                            
+                            </h4>
                         </div>
                     </div>
 
@@ -253,25 +258,31 @@
                                         <label class="d-none">Username</label>
                                         <input type="text" name="username" id="username"
                                             class="form-control d-none input-md"
-                                            tabindex="1" value="<%= username %>" required>
+                                            tabindex="1" value="<%= user.username %>" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="d-none">Account Name</label>
+                                        <input type="text" name="accountname" id="accountname"
+                                            class="form-control d-none input-md" tabindex="1"
+                                            value="<%= user.accountname %>" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Withdrawal Amount (₦)</label>
                                         <input type="number" name="amountwithdraw" id="amountWithdraw"
-                                            class="form-control input-md" tabindex="1" required="">
+                                            class="form-control input-md" tabindex="1" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Bank Account Number</label>
                                         <input type="number" name="accountnumber" id="accountnumber"
-                                            class="form-control input-md" tabindex="1" value="<%= accountnumber %>"
+                                            class="form-control input-md" tabindex="1" value="<%= user.accountnumber %>"
                                             required>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Bank</label>
                                         <input type="text" id="amount" class="form-control input-md" name="accountbank"
-                                            value="<%= accountbank %>" tabindex="1" required>
+                                            value="<%= user.accountbank %>" tabindex="1" required>
                                     </div>
 
                                     <button type="submit" id="submitBtn" class="btn bg-success text-light">Make
