@@ -84,7 +84,6 @@ router.get("/withdraw", ensureAuthenticated, (req, res) => {
          return calcbal;
       }
       
-      console.log(accbal(user.totalfunds))
     
       if (user.totalfunds !== undefined) {
          res.render("withdraw", {
@@ -127,7 +126,7 @@ router.get("/task", ensureAuthenticated, (req, res) => {
   })
 });
 
-router.post("/withdraw", (req, res) => {
+router.post("/withdraw", ensureAuthenticated, (req, res) => {
   const { username, amountwithdraw, accountname, accountnumber, accountbank, 
   } = req.body;
 
@@ -157,6 +156,20 @@ router.post("/withdraw", (req, res) => {
 
       let errors = [];
 
+           
+       function accbal(bal) {
+         let calcbal = 0;
+         for (let i = 0; i < bal.length; i++) {
+           calcbal += bal[i].accountbalance;
+         }
+         return calcbal;
+       }
+      
+
+      if (Number(amountwithdraw) > accbal(user.totalfunds)) { 
+        return errors.push({msg:"You have an insufficient balance, pay for a new plan or try a lesser amount"});
+      }
+
       
       let showbal = -amountwithdraw;
     
@@ -165,16 +178,6 @@ router.post("/withdraw", (req, res) => {
         allowBalance: true
       });
     
-      
-       function accbal(bal) {
-         let calcbal = 0;
-         for (let i = 0; i < bal.length; i++) {
-           calcbal += bal[i].accountbalance;
-         }
-         return calcbal;
-      }
-      
-      
 
       function lastfuc() {
         let poplast = user.totalfunds;
