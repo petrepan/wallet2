@@ -5,6 +5,7 @@ const flash = require("connect-flash")
 const session = require("express-session")
 const passport = require("passport")
 const methodOverride = require("method-override");
+require("dotenv").config({path: './secret.env'});
 
 
 const app = express();
@@ -12,10 +13,7 @@ const app = express();
 //passport config 
 require("./config/passport")(passport);
 
-const mongoURI = "mongodb+srv://peter123:petrepan1234@cluster0-nr9jq.mongodb.net/test?retryWrites=true&w=majority";
-
-const mongoDB = process.env.mongoDB_URI || mongoURI;
-
+const mongoURI = process.env.MONGO_URI;
 
 //connect to mongo
 mongoose
@@ -67,6 +65,6 @@ app.use("/users", require("./routes/users"));
 
 
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
