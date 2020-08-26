@@ -8,8 +8,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
   },
   number: {
-    type: Number,
-  },
+    type: String,
+  }, 
   accountname: {
     type: String,
   },
@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Task",
-    },
+    }, 
   ],
   withdraw: {
     type: mongoose.Schema.Types.ObjectId,
@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema({
     }
   ],
   accountnumber: {
-    type: Number,
+    type: String,
   },
   accountbank: {
     type: String,

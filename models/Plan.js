@@ -28,11 +28,9 @@ const planSchema = new Schema({
   },
   accountbank: {
     type: String,
-    required: true,
   },
   accountnumber: {
     type: Number,
-    required: false,
   },
   date: {
     type: Date,

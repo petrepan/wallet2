@@ -285,20 +285,20 @@ router.post("/task/:id", (req, res) => {
 router.post(
   "/subscription/:id", 
   (req, res) => {
-    const id = req.params.id;
+    const id = req.body.username;
     console.log(id)
-    const { sub, daily, username, accountnumber, accountbank } = req.body;
+    const { sub, daily, username } = req.body;
     let allowBalance;
     allowBalance ? false : true; 
     
-    User.findById(id).then(user => {
+    User.findOne({ username: req.body.username }).then(user => {
+      console.log(user)
       const newPlan = new Plan({
         username : username,
         sub : sub,
         daily : daily,
-        allowBalance : allowBalance,
-        accountnumber : accountnumber,
-        accountbank : accountbank,
+        allowBalance : allowBalance, 
+        
       })
         user.plan = newPlan;
 
@@ -311,7 +311,7 @@ router.post(
           "success_msg",
           "P.S: Pay the respective Subscription to an agent and start submitting task to earn. "
         );
-        res.redirect("/dashboard"); 
+        res.redirect("/admin/verify"); 
         })
       })
         .catch((err) => console.log(err)); 
@@ -474,15 +474,15 @@ console.log(req.params.id)
          req.flash("error_msg", "Task has been disapproved"); 
       }
       
-      res.redirect('/admin/task')
+      res.redirect('/admin/task') 
     })
   })
 })
 
-router.get("/admin/freeplan", ensureAdminAuthenticated, (req, res) => {
-  Plan.find({}, (err, data) => {
-    res.render("adminFreeUsers", { data: data });
-  });
+router.get("/admin/verify", ensureAdminAuthenticated, (req, res) => {
+
+    res.render("adminVerify");
+
 });
 
 
@@ -493,7 +493,7 @@ router.get("/password", function (req, res) {
 })
 
 
-router.post("/forgot", function (req, res, next) {
+router.post("/forgot", function (req, res, next) { 
   async.waterfall(
     [
       function (done) {

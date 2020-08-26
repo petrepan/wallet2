@@ -204,43 +204,43 @@
                 </li>
                 <li class="nav-item navigation current" data-tab="tab-4">
                     <a class="nav-link link-text text-ref text-muted" href="/admin/freeplan"><span><i
-                                class="fas fa-money-check"></i></span> Free users</a>
+                                class="fas fa-money-check"></i></span> Verify</a>
                 </li>
             </ul>
         </nav>
         <div class="container mt-3">
-            <div class="col-md-12 pb-5">
-                <div class="col-12">
-                    <h4 class="text-center p-3">Task submission</h4>
-                </div>
-                <div>
-                    <input type="text" id="searchBar" class="form-control" placeholder="Seach for User">
-                </div>
-                <div class="table-responsive text-nowrap mt-3">
-                    <table class="table">
-                        <thead>
-                            <tr>
+            <%- include('partials/messages') %>
+              <form action="/subscription/id" method="post" class="form-group">
+                 
+                  <div class="card-body card-paragraph">
+                      <!-- <input class="form-control my-2" type="text" name="id"> -->
+                      <input class="form-control my-2" type="text" name="username" placeholder="username">
+                      <input class="form-control my-2" type="text" name="daily" placeholder="daily revenue">
+                      <input class="form-control my-2" type="text" name="sub" placeholder="subscription name">
 
-                                <th scope="Status">Username</th>
-                                <th scope="Status">Plan</th>
-                                <th scope="Date">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
+                   <input type="submit" value="Submit" class="btn btn-success">
 
-                            <% data.filter(function(item){ %>
-                            <tr class="tableRow">
-                                <td class="userName"><%= item.username %></td>
-                                <td><%= item.freeplan %></td>
-                                <td><%= item.date %></td>
-                            </tr>
-                            <% }); %>
+                  </div>
+              </form>
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
          <script src="/js/dashboard.js"></script>
+          <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+              integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+              crossorigin="anonymous">
+          </script>
+          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+              integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+              crossorigin="anonymous">
+          </script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+              integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+              crossorigin="anonymous">
+          </script>
+
+          <script src="/js/bootstrap.bundle.min.js"
+              integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
+              crossorigin="anonymous">
+          </script>
     </body>
 </html>
