@@ -178,6 +178,7 @@
                       overflow: auto;
                   }
             } */
+
         </style>
     </head>
 
@@ -207,10 +208,10 @@
             </ul>
         </nav>
 
-      
+
 
         <div class="container mt-3">
-              <%- include('partials/messages') %>
+            <%- include('partials/messages') %>
             <div class="col-md-12 pb-5">
                 <div class="col-12">
                     <h4 class="text-center p-3">Task submission</h4>
@@ -227,6 +228,7 @@
                                 <th scope="Status">Task Approved</th>
                                 <th scope="Date">Task One</th>
                                 <th scope="Date">Task two</th>
+                                <th scope="Date">Task three</th>
                                 <th scope="Date">Date</th>
                             </tr>
                         </thead>
@@ -234,34 +236,37 @@
 
                             <% data.filter(function(item){ %>
                             <tr class="tableRow">
-                                 <% if(item.accountbalance > 0){ %>
+                                <% if(item.accountbalance > 0){ %>
                                 <td class="userName"><%= item.username %></td>
-                                  <form action="/taskApprove/<%= item._id %>" method="POST">
-                                      <% if(!item.allowBalance) {%>
-                                      <td>
-                                          <input type="checkbox" name="allowBalance" class="d-none">
-                                          <button type="submit" class="btn btn-danger">
-                                              <!-- <%= item.allowBalance %> --> Awaiting Approval
-                                          </button>
+                                <form action="/taskApprove/<%= item._id %>" method="POST">
+                                    <% if(!item.allowBalance) {%>
+                                    <td>
+                                        <input type="checkbox" name="allowBalance" class="d-none">
+                                        <button type="submit" class="btn btn-danger">
+                                            <!-- <%= item.allowBalance %> --> Awaiting Approval
+                                        </button>
 
-                                      </td>
-                                      <% }else{ %>
-                                      <td>
-                                          <input type="checkbox" name="allowBalance" class="d-none" checked>
-                                          <button type="submit" class="btn btn-success">
-                                              <!-- <%= item.allowBalance %> --> Task Approved
-                                          </button>
+                                    </td>
+                                    <% }else{ %>
+                                    <td>
+                                        <input type="checkbox" name="allowBalance" class="d-none" checked>
+                                        <button type="submit" class="btn btn-success">
+                                            <!-- <%= item.allowBalance %> --> Task Approved
+                                        </button>
 
-                                      </td>
+                                    </td>
 
-                                      <% } %>
-                                  </form>
-                                <td><a rel="noopener noreferrer" target="_blank" href="<%= item.task1 %>"><%= item.task1 %></a></td>
+                                    <% } %>
+                                </form>
+                                <td><a rel="noopener noreferrer" target="_blank"
+                                        href="<%= item.task1 %>"><%= item.task1 %></a></td>
                                 <td><a href="<%= item.task2 %>" target="_blank"
                                         rel="noopener noreferrer"><%= item.task2 %></a></td>
+                                <td><a href="<%= item.task3 %>" target="_blank"
+                                        rel="noopener noreferrer"><%= item.task3 %></a></td>
                                 <td><%= item.date %></td>
-                              
-                                   <% } %>
+
+                                <% } %>
                             </tr>
                             <% }); %>
 
@@ -270,23 +275,19 @@
                 </div>
             </div>
         </div>
-         <script src="/js/dashboard.js"></script>
-          <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-              integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-              crossorigin="anonymous">
-          </script>
-          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-              integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-              crossorigin="anonymous">
-          </script>
-          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-              integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-              crossorigin="anonymous">
-          </script>
+        <script src="/js/dashboard.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
 
-          <script src="/js/bootstrap.bundle.min.js"
-              integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
-              crossorigin="anonymous">
-          </script>
+        <script src="/js/bootstrap.bundle.min.js"
+            integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
+        </script>
     </body>
 </html>

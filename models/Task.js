@@ -11,6 +11,9 @@ const taskSchema = new Schema({
   task2: {
     type: String,
   },
+  task3: {
+    type: String,
+  },
   sub: {
     type: String,
   },

@@ -224,12 +224,12 @@ router.post("/withdraw", ensureAuthenticated, (req, res) => {
 //task
 router.post("/task/:id", (req, res) => {
   const id = req.params.id;
-  const { username, daily, sub, task1, task2 } = req.body;
+  const { username, daily, sub, task1, task2, task3 } = req.body;
   let allowBalance;
   allowBalance ? false : true;
 
   const task = new Task({
-    username, task1, daily, sub, task2, allowBalance
+    username, task1, daily, sub, task2, task3, allowBalance
   });
 
   User.findById(id).populate("task totalfunds")
