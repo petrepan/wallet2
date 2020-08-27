@@ -6,9 +6,12 @@ const session = require("express-session")
 const passport = require("passport")
 const methodOverride = require("method-override");
 require("dotenv").config({path: './secret.env'});
+var http = require("http");
+var enforce = require("express-sslify");
 
 
 const app = express();
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 //passport config 
 require("./config/passport")(passport);
