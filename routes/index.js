@@ -481,8 +481,10 @@ console.log(req.params.id)
 })
 
 router.get("/admin/verify", ensureAdminAuthenticated, (req, res) => {
-
-    res.render("adminVerify");
+  Plan.find({}, (err, data) => {
+    res.render("adminVerify",{data:data});
+  })
+    
 
 });
 

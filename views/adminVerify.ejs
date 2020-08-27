@@ -223,6 +223,33 @@
                   </div>
               </form>
 
+               <div class="table-responsive text-nowrap mt-3">
+                   <table class="table">
+                       <thead>
+                           <tr>
+
+                               <th scope="Status">Username</th>
+                               
+                               <th scope="Date">daily revenue</th>
+                               <th scope="Date">sub name</th>
+                               <th scope="Date">Date Registered</th>
+                           </tr>
+                       </thead>
+                       <tbody id="tableBody">
+
+                           <% data.filter(function(item){ %>
+                           <tr class="tableRow">
+                               <td class="userName"><%= item.username %></td>
+                               <td><%= item.daily %></td>
+                               <td><%= item.sub %></td>
+                               <td><%= item.date %></td>
+                           </tr>
+                           <% }); %>
+
+                       </tbody>
+                   </table>
+               </div>
+
         </div>
          <script src="/js/dashboard.js"></script>
           <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
