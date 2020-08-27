@@ -357,7 +357,7 @@
                                                     placeholder="Task two" required>
                                             </div>
                                             <div class="form-group">
-                                                <label class="sr-only">Task two</label>
+                                                <label class="sr-only">Task three</label>
                                                 <input type="url" name="task3" id="task3" class="form-control input-md"
                                                     placeholder="Task three" required>
                                             </div>
@@ -393,8 +393,8 @@
                                 <div class="col-12">
                                     <h4 class="text-center">Task History</h4>
                                 </div>
-                                <div class="table-responsive text-nowrap">
-                                    <table class="table">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th scope="S/N">S/N</th>
@@ -413,8 +413,9 @@
                                                     <td>Awaiting Approval</td>
                                                     <%}%>
                                                       <td id="taskStatus"><a
-                                                              href="<%= task.task1 %>"><%= task.task1 %></a></td>
-                                                    <td><a href="<%= task.task2 %>"><%= task.task2 %></a></td>
+                                                              href="<%= task.task1 %>">Task One</a></td>
+                                                    <td><a href="<%= task.task2 %>"><%= Task Two %></a></td>
+                                                    <td><a href="<%= task.task3 %>"><%= Task Three %></a></td>
                                                     <td><%= task.date %></td>
                                                 </tr>
                                            <% } %>
