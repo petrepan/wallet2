@@ -254,6 +254,7 @@ router.post("/task/:id", (req, res) => {
         accountbalance: checkTrue(user.task),
         task1,
         task2,
+        task3,
         allowBalance
       });
     
@@ -309,7 +310,7 @@ router.post(
         newPlan.save().then(subplan => {      
         req.flash(
           "success_msg",
-          "P.S: Pay the respective Subscription to an agent and start submitting task to earn. "
+          "User has been successfully activated. "
         );
         res.redirect("/admin/verify"); 
         })

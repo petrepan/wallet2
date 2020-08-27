@@ -15,6 +15,9 @@ const totalfundsSchema = new mongoose.Schema({
   task2: {
     type: String,
   },
+  task3: {
+    type: String,
+  },
   allowBalance: {
     type: Boolean,
     default: false,
