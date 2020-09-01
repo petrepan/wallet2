@@ -456,7 +456,6 @@ router.get("/admin", ensureAdminAuthenticated, (req, res) => {
 
 router.get("/admin/task", ensureAdminAuthenticated, (req, res) => {
   Totalfunds.find({}, (err, data) => {
-    console.log(data)
     res.render("adminTask", { data: data });
   });
 });
