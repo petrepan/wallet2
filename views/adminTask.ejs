@@ -219,7 +219,7 @@
                 <div>
                     <input type="text" id="searchBar" class="form-control" placeholder="Seach for User">
                 </div>
-                <div class="table-responsive text-nowrap mt-3 mb-5 pb-5">
+                <div id="table-pagin" class="table-responsive text-nowrap mt-3">
                     <table class="table overflow-auto">
                         <thead>
                             <tr>
@@ -273,9 +273,11 @@
                         </tbody>
                     </table>
                 </div>
+                <div id="index_native" class="box mb-5 pb-4 pt-2"></div>
             </div>
         </div>
         <script src="/js/dashboard.js"></script>
+        <script src="/js/paginator.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
         </script>
@@ -289,5 +291,17 @@
         <script src="/js/bootstrap.bundle.min.js"
             integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
         </script>
+
+           <script type="text/javascript">
+               window.addEventListener("load", function () {
+                   
+                   paginator({
+                       table: document.getElementById("table-pagin").getElementsByTagName("table")[
+                           0],
+                       box: document.getElementById("index_native"),
+                       active_class: "bg-success border p-2"
+                   });
+               }, false);
+           </script>
     </body>
 </html>
