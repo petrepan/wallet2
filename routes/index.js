@@ -52,28 +52,8 @@ router.get("/dashboard", ensureAuthenticated, (req, res) => {
 );
 
 router.get("/withdraw", ensureAuthenticated, (req, res) => {
-  User.findOne(req.user._id).populate("task totalfunds")
+  User.findOne(req.user._id).populate("task totalfunds plan")
     .then(user => {
-     function checkTrue(usertask) {
-         let falseDaily = 0;
-         for (let i = 0; i < usertask.length; i++) {
-             if (usertask[i].allowBalance) {
-               falseDaily += usertask[i].daily;
-           }
-         }
-         return falseDaily;
-      }
-
-      // if (user.totalfunds !== undefined) {
-      //       function accbal(bal) {
-      //         let calcbal = 0;
-      //         for (let i = 0; i < bal.length; i++) {
-      //           calcbal += bal.accountbalance;
-      //         }
-      //         return calcbal;
-      //       }
-      // }
-      
        function accbal(bal) {
          let calcbal = 0;
          for (let i = 0; i < bal.length; i++) {
@@ -83,19 +63,20 @@ router.get("/withdraw", ensureAuthenticated, (req, res) => {
          }
          return calcbal;
       }
-      
     
       if (user.totalfunds !== undefined) {
          res.render("withdraw", {
            user: req.user,
-           plan: user.task,
+           task: user.task,
            total: accbal(user.totalfunds),
+           plan: user.plan
          });
       } else {  
          res.render("withdraw", {
            user: req.user,
-           plan: user.task,
+           task: user.task,
            total: 0,
+           plan: user.plan
          });
       }
 
