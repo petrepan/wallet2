@@ -29,6 +29,8 @@ router.post("/register", (req, res) => {
     password,
     password2,
   } = req.body;
+
+  username.trim()
   let errors = [];
   //check required fields
   if (
