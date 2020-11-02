@@ -223,17 +223,20 @@
                                 <th scope="Date">Bank account</th>
                                 <th scope="Date">Account number</th>
                                 <th scope="Date">Phone Number</th>
+                                <th scope="Date">Balance</th>
                                 <th scope="Date">Date Registered</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody">
 
                             <% data.filter(function(item){ %>
+                                
                             <tr class="tableRow">
                                 <td class="userName"><%= item.username %></td>
                                 <td><%= item.accountbank %></td>
                                 <td><%= item.accountnumber %></td>
                                 <td><%= item.number %></td>
+                                <td><%= total %></td>
                                 <td><%= item.date %></td>
                             </tr>
                             <% }); %>

@@ -201,7 +201,8 @@
             <div class="container">
                 <header class="row justify-content-between pt-4 pl-3 pr-3 pb-5">
                     <div>
-                        <span class="text-muted">Howdy</span> <span class="username"> <%= user.username %> &#9995;</span>
+                        <span class="text-muted">Howdy</span> <span class="username"> <%= user.username %>
+                            &#9995;</span>
                     </div>
                     <a class="pr-1" href="/profile"><i class="fas text-success fa-user-circle">
 
@@ -209,7 +210,11 @@
                 </header>
                 <%- include('partials/messages') %>
 
+                <div class="alert alert-dismissible font-weight-lighter alert-info mt-2">
 
+                    Please bear with us, we are currently upgrading
+
+                </div>
                 <!--CHOOSE A PLAN-->
                 <div id="tab-1" class=" pb-5 mb-5 current">
                     <h5 class="pl-1 text-muted text-uppercase">Choose a plan</h5>
@@ -217,30 +222,32 @@
                         <div class="col-sm-6">
                             <div class="card bg-secondary  mb-3">
                                 <!-- <form target="_blank" action="/subscription/<%= plan._id %>?newMethod=PUT" method="post"> -->
-                                    <form target="_blank" action="/subscription/<%= user._id %>" method="post">
-                                <div class="card-header font-weight-bold plan" data-plan="Mercury">Mercury</div>
-                                <div class="card-body card-paragraph">
-                                    <h5 class="card-title">Fee: 2,500 Naira</h5>
-                                    <p class="card-text"><span class="">Task/Target:</span> 3 Retweets
-                                    </p>
-                                    <p class="card-text"><span class="">Daily Revenue:</span> 150 Naira
-                                    </p>
-                                    <input type="text" name="id" value="<%= plan._id %>" class="d-none">
-                                    <input type="text" name="username" value="<%= user.username %>" class="d-none">
-                                    <input type="text" name="accountnumber" value="<%= user.accountnumber %>" class="d-none">
-                                    <input type="text" name="accountbank" value="<%= user.accountbank %>" class="d-none">
-                                    <input type="text" name="daily" value="150" class="d-none">
-                                    <input type="text" name="sub" value="mercury" class="d-none">
+                                <form target="_blank" action="/subscription/<%= user._id %>" method="post">
+                                    <div class="card-header font-weight-bold plan" data-plan="Mercury">Mercury</div>
+                                    <div class="card-body card-paragraph">
+                                        <h5 class="card-title">Fee: 2,500 Naira</h5>
+                                        <p class="card-text"><span class="">Task/Target:</span> 3 Retweets
+                                        </p>
+                                        <p class="card-text"><span class="">Daily Revenue:</span> 150 Naira
+                                        </p>
+                                        <input type="text" name="id" value="<%= plan._id %>" class="d-none">
+                                        <input type="text" name="username" value="<%= user.username %>" class="d-none">
+                                        <input type="text" name="accountnumber" value="<%= user.accountnumber %>"
+                                            class="d-none">
+                                        <input type="text" name="accountbank" value="<%= user.accountbank %>"
+                                            class="d-none">
+                                        <input type="text" name="daily" value="150" class="d-none">
+                                        <input type="text" name="sub" value="mercury" class="d-none">
 
-                                    <!-- <input
+                                        <!-- <input
                                         onclick="window.location.href = 'https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20MERCURY%20plan';"
                                         type="submit" class="btn card-paragraph btn-success planbtn" value="Subscribe"> -->
-                             
-                                  <a href="https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20MERCURY%20plan"
-                                      target="_blank" class="btn card-paragraph btn-success planbtn" rel="noopener
+
+                                        <a href="https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20MERCURY%20plan"
+                                            target="_blank" class="btn card-paragraph btn-success planbtn" rel="noopener
                                    noreferrer">Subscribe</a>
-                              
-                                </div>
+
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -254,134 +261,130 @@
                                         </p>
                                         <p class="card-text"><span class="">Daily Revenue:</span> 300 Naira
                                         </p>
-                                         <input type="text" name="username" value="<%= user.username %>" class="d-none">
-                                         <input type="text" name="accountnumber" value="<%= user.accountnumber %>"
-                                             class="d-none">
-                                         <input type="text" name="accountbank" value="<%= user.accountbank %>"
-                                             class="d-none">
-                                         <input type="text" name="daily" value="300" class="d-none">
-                                         <input type="text" name="sub" value="venus" class="d-none">
+                                        <input type="text" name="username" value="<%= user.username %>" class="d-none">
+                                        <input type="text" name="accountnumber" value="<%= user.accountnumber %>"
+                                            class="d-none">
+                                        <input type="text" name="accountbank" value="<%= user.accountbank %>"
+                                            class="d-none">
+                                        <input type="text" name="daily" value="300" class="d-none">
+                                        <input type="text" name="sub" value="venus" class="d-none">
 
-                                
-                                     <!-- <input
+
+                                        <!-- <input
                                         onclick="window.location.href =
                                         'https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20VENUS%20plan';"
                                         type="submit" class="btn card-paragraph btn-primary planbtn" value="Subscribe"> -->
 
-                                         
-                                              <a href="https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20VENUS%20plan"
-                                                  target="_blank" class="btn card-paragraph btn-primary planbtn" rel="noopener
+
+                                        <a href="https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20VENUS%20plan"
+                                            target="_blank" class="btn card-paragraph btn-primary planbtn" rel="noopener
                                    noreferrer">Subscribe</a>
-                                          
+
                                 </form>
-                                
-                                </div>  
+
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="card bg-primary mb-3">
-                                 <form target="_blank" action="/subscription/<%= user._id %>" method="post">
-                                     <div class="card-header font-weight-bold plan" data-plan="Earth">Earth</div>
-                                     <div class="card-body card-paragraph">
-                                         <h5 class="card-title">Fee: 10,000 Naira</h5>
-                                         <p class="card-text"><span class="">Task/Target:</span> 3 Retweets
-                                         </p>
-                                         <p class="card-text"><span class="">Daily Revenue:</span> 600 Naira
-                                         </p>
-                                          <input type="text" name="username" value="<%= user.username %>"
-                                              class="d-none">
-                                          <input type="text" name="accountnumber" value="<%= user.accountnumber %>"
-                                              class="d-none">
-                                          <input type="text" name="accountbank" value="<%= user.accountbank %>"
-                                              class="d-none">
-                                          <input type="text" name="daily" value="600" class="d-none">
-                                          <input type="text" name="sub" value="earth" class="d-none">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card bg-primary mb-3">
+                            <form target="_blank" action="/subscription/<%= user._id %>" method="post">
+                                <div class="card-header font-weight-bold plan" data-plan="Earth">Earth</div>
+                                <div class="card-body card-paragraph">
+                                    <h5 class="card-title">Fee: 10,000 Naira</h5>
+                                    <p class="card-text"><span class="">Task/Target:</span> 3 Retweets
+                                    </p>
+                                    <p class="card-text"><span class="">Daily Revenue:</span> 600 Naira
+                                    </p>
+                                    <input type="text" name="username" value="<%= user.username %>" class="d-none">
+                                    <input type="text" name="accountnumber" value="<%= user.accountnumber %>"
+                                        class="d-none">
+                                    <input type="text" name="accountbank" value="<%= user.accountbank %>"
+                                        class="d-none">
+                                    <input type="text" name="daily" value="600" class="d-none">
+                                    <input type="text" name="sub" value="earth" class="d-none">
 
 
-                                     <!-- <input
+                                    <!-- <input
                                         onclick="window.location.href =
                                         'https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20EARTH%20plan';"
                                         type="submit" class="btn card-paragraph btn-success planbtn" value="Subscribe"> -->
-                                        <a href="https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20EARTH%20plan"
-                                            target="_blank" class="btn card-paragraph btn-success planbtn" rel="noopener
+                                    <a href="https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20EARTH%20plan"
+                                        target="_blank" class="btn card-paragraph btn-success planbtn" rel="noopener
                                    noreferrer">Subscribe</a>
-                                </form>
-                               
-                                </div>
-                            </div>
+                            </form>
+
                         </div>
-                        <div class="col-sm-6">
-                            <div class="card bg-warning mb-3">
-                                <form target="_blank" action="/subscription/<%= user._id %>" method="post">
-                                 <div class="card-header font-weight-bold plan" data-plan="Mars">Mars</div>
-                                 <div class="card-body card-paragraph">
-                                     <h5 class="card-title">Fee: 30,000</h5>
-                                     <p class="card-text"><span class="">Task/Target:</span> 3 Retweets
-                                     </p>
-                                     <p class="card-text"><span class="">Daily Revenue:</span> 1800 Naira
-                                     </p>
-                                      <input type="text" name="username" value="<%= user.username %>" class="d-none">
-                                      <input type="text" name="accountnumber" value="<%= user.accountnumber %>"
-                                          class="d-none">
-                                      <input type="text" name="accountbank" value="<%= user.accountbank %>"
-                                          class="d-none">
-                                      <input type="text" name="daily" value="1800" class="d-none">
-                                      <input type="text" name="sub" value="mars" class="d-none">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card bg-warning mb-3">
+                        <form target="_blank" action="/subscription/<%= user._id %>" method="post">
+                            <div class="card-header font-weight-bold plan" data-plan="Mars">Mars</div>
+                            <div class="card-body card-paragraph">
+                                <h5 class="card-title">Fee: 30,000</h5>
+                                <p class="card-text"><span class="">Task/Target:</span> 3 Retweets
+                                </p>
+                                <p class="card-text"><span class="">Daily Revenue:</span> 1800 Naira
+                                </p>
+                                <input type="text" name="username" value="<%= user.username %>" class="d-none">
+                                <input type="text" name="accountnumber" value="<%= user.accountnumber %>"
+                                    class="d-none">
+                                <input type="text" name="accountbank" value="<%= user.accountbank %>" class="d-none">
+                                <input type="text" name="daily" value="1800" class="d-none">
+                                <input type="text" name="sub" value="mars" class="d-none">
 
 
-                                     <!-- <input
+                                <!-- <input
                                         onclick="window.location.href = 'https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20MARS%20plan';"
                                         type="submit" class="btn card-paragraph btn-info planbtn" value="Subscribe"> -->
 
-                                        <a href="https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20MARS%20plan"
-                                            target="_blank" class="btn card-paragraph btn-info planbtn" rel="noopener
+                                <a href="https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20MARS%20plan"
+                                    target="_blank" class="btn card-paragraph btn-info planbtn" rel="noopener
                                    noreferrer">Subscribe</a>
-                                </form>                                 
-                               
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card bg-success mb-3">
-                                <form target="_blank" action="/subscription/<%= user._id %>" method="post">
-                                 <div class="card-header font-weight-bold plan" data-plan="Sun">Sun</div>
-                                 <div class="card-body card-paragraph">
-                                     <h5 class="card-title">Fee: 60,000 Naira</h5>
-                                     <p class="card-text"><span class="">Task/Target:</span> No Retweets
-                                     </p>
-                                     <p class="card-text"><span class="">Daily Revenue:</span> 3600 Naira
-                                     </p>
-                                      <input type="text" name="username" value="<%= user.username %>" class="d-none">
-                                      <input type="text" name="accountnumber" value="<%= user.accountnumber %>"
-                                          class="d-none">
-                                      <input type="text" name="accountbank" value="<%= user.accountbank %>"
-                                          class="d-none">
-                                      <input type="text" name="daily" value="3600" class="d-none">
-                                      <input type="text" name="sub" value="sun" class="d-none">
-
-
-                                     <!-- <input
-                                        onclick="window.location.href =
-                                        'https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20SUN%20plan';"
-                                        type="submit" class="btn card-paragraph btn-secondary planbtn" value="Subscribe"> -->
-                                        <a href="https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20SUN%20plan"
-                                            target="_blank" class="btn card-paragraph btn-secondary planbtn" rel="noopener
-                                   noreferrer">Subscribe</a>
-                                </form>
-                               
-                                </div>
-                            </div>
-                        </div>
+                        </form>
 
                     </div>
                 </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card bg-success mb-3">
+                    <form target="_blank" action="/subscription/<%= user._id %>" method="post">
+                        <div class="card-header font-weight-bold plan" data-plan="Sun">Sun</div>
+                        <div class="card-body card-paragraph">
+                            <h5 class="card-title">Fee: 60,000 Naira</h5>
+                            <p class="card-text"><span class="">Task/Target:</span> No Retweets
+                            </p>
+                            <p class="card-text"><span class="">Daily Revenue:</span> 3600 Naira
+                            </p>
+                            <input type="text" name="username" value="<%= user.username %>" class="d-none">
+                            <input type="text" name="accountnumber" value="<%= user.accountnumber %>" class="d-none">
+                            <input type="text" name="accountbank" value="<%= user.accountbank %>" class="d-none">
+                            <input type="text" name="daily" value="3600" class="d-none">
+                            <input type="text" name="sub" value="sun" class="d-none">
 
-              
 
-                <!--WITHDRAWAL-->
+                            <!-- <input
+                                        onclick="window.location.href =
+                                        'https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20SUN%20plan';"
+                                        type="submit" class="btn card-paragraph btn-secondary planbtn" value="Subscribe"> -->
+                            <a href="https://wa.me/+2349044300896?text=Hello%20Admin%0AI%20want%20to%20subscribe%20to%20the%20SUN%20plan"
+                                target="_blank" class="btn card-paragraph btn-secondary planbtn" rel="noopener
+                                   noreferrer">Subscribe</a>
+                    </form>
+
+                </div>
+            </div>
+            </div>
+
+            </div>
+            </div>
 
 
-                <!-- <div id="tab-3" class=" pb-5">
+
+            <!--WITHDRAWAL-->
+
+
+            <!-- <div id="tab-3" class=" pb-5">
                     <h3 class="todaytask">Withdraw Funds</h3>
                     <div class="col-12 mt-3">
                         <h6 class="text-muted m-0">INFO</h6>
@@ -394,7 +397,7 @@
                         </div>
                     </div>
                     <hr> -->
-                    <!-- <div class="container pt-5">
+            <!-- <div class="container pt-5">
                         <div class="col-sm-6 withdrawss">
                             <h4 class="cplan">BALANCE</h4>
                             <h4 class="amount"><span id="dashBalance"></span> <span></span></h4>
@@ -404,7 +407,7 @@
 
 
 
-                    <!-- <div class="container pt-3 mb-5">
+            <!-- <div class="container pt-3 mb-5">
                         <div class="row">
                             <div class="col-md-6">
 
@@ -444,7 +447,7 @@
 
 
 
-                            <!-- <div class="col-md-12 p-3">
+            <!-- <div class="col-md-12 p-3">
 
                                 <h3>Withdrawal History</h3>
                                 <div class="table-responsive-sm">
