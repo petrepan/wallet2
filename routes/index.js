@@ -591,7 +591,7 @@ const forgotPassword = (req, res) => {
       subject: "Reset Password Link",
       html: `
     <h2>Please click on the given link to reset your password</h2>
-    <a href="http://localhost:5000/reset/${token}">localhost:5000/reset/${token}</a>
+    <a href="http://tweetwallet.co/reset/${token}">tweetwallet.co/reset/${token}</a>
     `,
     };
 
