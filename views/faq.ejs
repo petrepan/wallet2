@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Tweet wallet | Advertise</title>
+    <title>Tweet wallet | FAQ</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/314d085fdf.js" crossorigin="anonymous"></script>
     <!-- Favicons -->
      <link rel="shortcut icon" href="\img\favicon.ico" type="image/x-icon">
      <link rel="icon" href="\img\favicon.ico" type="image/x-icon">
+
+
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -31,6 +33,45 @@
 
         #309030
       */
+
+
+      .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 15px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+      }
+
+      .current,
+      .accordion:hover {
+        background-color: #309030;
+      }
+
+      .accordion:after {
+        content: '\002B';
+        color: green;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+      }
+
+      .current:after {
+        content: "\2212";
+      }
+
+      .panel {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+      }
 
       .navbar-toggler {
         background-color: #309030 !important;
@@ -64,51 +105,14 @@
         }
       }
 
-      @media (max-width: 968px){
-        .nav-item{
+      @media (max-width: 968px) {
+        .nav-item {
           padding-bottom: 10px;
         }
 
-        a{
-          display:inline-block!important;
+        a {
+          display: inline-block !important;
         }
-      }
-
-      @media (max-width: 400px) {
-
-        .jumbotron {
-          padding: 16px !important;
-        }
-
-        .jumbo-img {
-          padding-top: 36px;
-        }
-
-        .jumbo-head {
-          font-size: 25px;
-        }
-
-        .jumbo-paragraph {
-          font-size: 16px;
-        }
-
-        .text-h2 {
-          font-size: 26px;
-        }
-
-        .h5-text{
-        font-size: 13px;
-        }
-
-        .text-paragraph {
-          font-size: 16px;
-        }
-
-        #navbarsExampleDefault a {
-          display: inline-block;
-        }
-
-
       }
 
     </style>
@@ -126,28 +130,31 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link text-secondary h5-text" href="/">Home</a>
+            <a class="nav-link text-secondary" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-secondary h5-text border-bottom" href="advertise.html">Advertise with us<span
-                class="sr-only">(current)</span></a>
+            <a class="nav-link text-secondary" href="/advertise">Advertise with us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-secondary h5-text" href="users/login">Login</a>
+            <a class="nav-link text-secondary" href="users/login">Login</a>
           </li>
 
 
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link text-secondary h5-text" href="faq.html">Frequently asked questions</a>
+            <% if (req.path == '/faq' ) { %>
+              <a 
+              class="nav-link text-white  h5-text border-bottom d-inline-block rounded-sm bg-success px-4"
+              href="/">Frequently Asked Questions 
+              </a>
+          <% } %>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-secondary h5-text" href="mailto:">contact us</a>
+            <a class="nav-link text-secondary" href="mailto:admin@tweetwallet.co">contact us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-secondary h5-text rounded-sm border border-success px-4" href="users/register">sign
-              up</a>
+            <a class="nav-link text-secondary rounded-sm border border-success px-4" href="users/register">sign up</a>
           </li>
 
 
@@ -155,32 +162,48 @@
       </div>
     </nav>
 
-    <main role="main">
+    <main role="main" class="p-4 mb-md-5">
+      <div class="container pt-4">
+        <h1 class="text-center h4 pb-3"> Frequently asked question</h1>
 
-
-      <section class="sub-plan py-4">
-        <div class="container">
-          <div>
-            <h2 class="h2 jumbo-head pb-2">
-              Advertise your product
-            </h2>
-            <p class="lead jumbo-paragraph w-75 pb-3">
-              Do you want to reach a large and unique audience? <br>
-              Take advantage of our wide range of diversity and audience to make your brand stands out.
-            </p>
-            <p class="w-100 text-muted jumbo-paragraph">With over large registered twitter users and tweets monthly; awareness and brand
-              exposure is not a problem. Our prices are flexible and cost effective.</p>
-            <p class="w-100 text-muted jumbo-paragraph">Contact us now at <a href="mailto:admin@tweetwallet.co"
-                class="text-dark">admin@tweetwallet.co</a> or on <a href="tel:+2349044300896">09044300896</a> and you
-                will be replied immediately with
-              price quotation.</p>
-          </div>
-
+        <button class="accordion h3">Do I have to refer someone before I get paid?</button>
+        <div class="panel">
+          <p>NO, we do not have any referral program nor are we planning to introduce anything like that. You can
+            introduce TweetWallet as a source of income to your family and friends but we do not pay commission on that, we
+            only pay you for tweeting.</p>
         </div>
-      </section>
+
+        <button class="accordion h3">How long does withdrawal take after making a withdrawal request?</button>
+        <div class="panel">
+          <p>Withdrawals are processed within minutes but the maximum time frame is within 12hours..</p>
+        </div>
+
+        <button class="accordion h3">I just registered, what next?</button>
+        <div class="panel">
+          <p>After successfully registering on this website, select your preferred plan, make payment, submit task and start earning</p>
+        </div>
+
+        <button class="accordion h3">Do I have to upload a link to daily task</button>
+        <div class="panel">
+          <p>Yes it is absolutely necessary to upload the link</p>
+        </div>
+
+        <button class="accordion h3">What if I do not tweet sponsored tweets in a day?</button>
+        <div class="panel">
+          <p>It is very simple, You will not get paid for that day. Please note that you will only get paid when you
+            tweet. You only get paid for the number of days you submit task </p>
+        </div>
+
+        <button class="accordion h3">How do we make money?</button>
+        <div class="panel">
+          <p>We are an organization that bridges the gap between brands and individuals/influencers. Brand pays us to advertise their products </p>
+        </div>
+
+      </div>
+
     </main>
 
-    <footer class="pt-4 pb-4">
+    <footer class="pt-5 pb-4">
       <div class="container p-4">
         <div class="row">
           <div class="col-lg-3">
@@ -192,7 +215,8 @@
               </address>
               <p>
                 <!-- <i class="icon-phone"></i> Phone no: <br>
-                <i class="icon-envelope-alt"></i> Email: admin@tweetwallet.co -->
+                <i class="icon-envelope-alt"></i> Email: <a href="mailto:admin@tweetwallet.co" class="text-dark">
+                  admin@tweetwallet.co </a> -->
               </p>
             </div>
           </div>
@@ -201,6 +225,7 @@
               <h6>Information</h6>
               <ul class="navbar-nav">
                 <li><a href="tac.html" class="text-dark">Terms and conditions</a></li>
+                  <li><a href="policy.html" class="text-dark">Privacy Policy</a></li>
                 <li><a href="advertise.html" class="text-dark">Advertise With Us</a></li>
                 <li><a href="mailto:admin@tweetwallet.co" class="text-dark">Contact Us</a></li>
               </ul>
@@ -219,7 +244,8 @@
           <div class="col-lg-3">
             <div class="pt-3">
               <h6>Advertise</h6>
-              <p>Want to take advantage of our incredible reach?<br>Reach us at admin@tweetwallet.co</p>
+              <p>Want to take advantage of our incredible reach?<br>Reach us at <a href="mailto:admin@tweetwallet.co"
+                  class="text-dark"> admin@tweetwallet.co </a></p>
             </div>
           </div>
         </div>
@@ -232,10 +258,33 @@
                 <p>&copy;TweetWallet - All Right Reserved</p>
               </div>
             </div>
+            <div class="col-lg-3">
+              <a href="#" class="text-dark px-2"><i class="fa fa-facebook"></i></a>
+              <a href="#" class="text-dark"><i class="fa fa-twitter"></i></a>
+
+            </div>
           </div>
         </div>
       </div>
     </footer>
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          this.classList.toggle("current");
+          var
+            panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+
+    </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>

@@ -6,6 +6,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Tweet wallet | Dashboard</title>
+        <a href="http://"></a>
 
         <!-- Bootstrap core CSS -->
         <link href="/css/bootstrap.min.css" rel="stylesheet"
@@ -132,6 +133,14 @@
             .copy {
                 font-size: 16px;
             }
+            .back a {
+                background: #ccc;
+                color: rgb(126, 114, 114);
+                padding: 8px 16px;
+                border-radius: 7px;
+                text-decoration: none;
+            }
+            
 
             /*primary-color: #006600;
         secondary-color: #003300;
@@ -204,9 +213,16 @@
                         <span class="text-muted">Howdy</span> <span class="username"> <%= user.username %>
                             &#9995;</span>
                     </div>
-                    <a class="pr-1" href="/profile"><i class="fas text-success fa-user-circle">
-
-                        </i></a>
+                   
+                    <div>
+                        
+                        <a class="pr-1" href="/profile/<%= user.id %>"><h3>Profile</h3><i class=" fas text-success fa-user-circle">
+    
+                            </i></a>
+                    </div>
+                    <div class="back">
+                        <a href="/users/login">Logout</a>
+                    </div>
                 </header>
                 <%- include('partials/messages') %>
 
