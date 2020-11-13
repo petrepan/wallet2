@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
-var nodemailer = require("nodemailer");
+const nodeMailer = require("nodemailer");
+const jwt = require("jsonwebtoken");
+const _ = require("lodash");
 var LocalStrategy = require("passport-local").Strategy;
 var async = require("async");
 var crypto = require("crypto");
@@ -18,10 +20,15 @@ const Totalfunds = require("../models/Totalfunds");
 const Planmercury = require("../models/Planmercury");
 
 //home page
-router.get("/", (req, res) => res.render("welcome"));
+router.get("/", (req, res) => res.render("welcome",{req:req}));
+
+router.get("/advertise", (req, res) => res.render("advertise",{req:req}));
+
+router.get("/faq", (req, res) => res.render("faq",{req:req}));
+
 
 //profile
-router.get("/profile", ensureAuthenticated, (req, res) => {
+router.get("/profile/:id", ensureAuthenticated, (req, res) => {
   res.render("profile", {
     username: req.user.username,
     fullname: req.user.fullname,
@@ -30,7 +37,65 @@ router.get("/profile", ensureAuthenticated, (req, res) => {
     accountname: req.user.accountname,
     accountnumber: req.user.accountnumber,
     accountbank: req.user.accountbank,
+    id: req.user.id,
   });
+});
+
+//edit profile
+router.get("/profile/edit/:id", ensureAuthenticated, (req, res) => {
+  res.render("edit", {
+    username: req.user.username,
+    fullname: req.user.fullname,
+    number: req.user.number,
+    username: req.user.username,
+    accountname: req.user.accountname,
+    accountnumber: req.user.accountnumber,
+    accountbank: req.user.accountbank,
+    id: req.user.id,
+  });
+});
+
+router.put("/profile/:id", ensureAuthenticated, async (req, res) => {
+  let id = req.user.id;
+  const {
+    fullname,
+    username,
+    number,
+    accountname,
+    accountnumber,
+    accountbank,
+  } = req.body;
+  let errors = [];
+
+  if (errors.length > 0) {
+    res.render("edit", {
+      errors,
+      id,
+      fullname,
+      username,
+      number,
+      accountname,
+      accountnumber,
+      accountbank,
+    });
+  } else {
+    let user = req.user;
+    user.fullname = req.body.fullname;
+    user.username = req.body.username;
+    user.number = req.body.number;
+    user.accountname = req.body.account_name;
+    user.accountnumber = req.body.accountnumber;
+    user.accountbank = req.body.accountbank;
+
+    try {
+      user = await user.save();
+      req.flash("success_msg", "Profile Succesfuly Updated");
+      res.redirect(`/profile/${user.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+   
+  }
 });
 
 //dashboard
@@ -355,6 +420,14 @@ router.get("/admin/login", (req, res) => {
   res.render("adminLogin");
 });
 
+//admin logout
+
+router.get("/admin/logout", (req, res) => {
+  req.logout();
+  req.flash("success_msg", "You are logged out");
+  res.redirect("/admin/login");
+});
+
 router.get("/admin/register", (req, res) => {
   res.render("adminRegister");
 });
@@ -430,20 +503,18 @@ router.get("/admin/withdrawal", ensureAdminAuthenticated, (req, res) => {
 router.get("/admin", ensureAdminAuthenticated, (req, res) => {
   function accbal(bal) {
     let calcbal = 0;
-    for (let i = 0; i < bal.length; i++) { 
+    for (let i = 0; i < bal.length; i++) {
       let value = bal[i];
 
       for (let j = 0; j < bal[i].length; j++)
         if (bal[i].allowBalance) {
           calcbal += bal[i][j].accountbalance;
-          console.log(calcbal)
+          console.log(calcbal);
         }
     }
     // if (bal[i].allowBalance) {
     //   calcbal += bal[i].accountbalance;
     // }
-
-    
   }
 
   User.find()
@@ -494,148 +565,154 @@ router.get("/password", function (req, res) {
   });
 });
 
-router.post("/forgot", function (req, res, next) {
-  async.waterfall(
-    [
-      function (done) {
-        crypto.randomBytes(20, function (err, buf) {
-          var token = buf.toString("hex");
-          done(err, token);
-        });
-      },
-      function (token, done) {
-        User.findOne({ email: req.body.email }, function (err, user) {
-          if (!user) {
-            req.flash("error", "No account with that email address exists.");
-            return res.redirect("/password");
-          }
-
-          user.resetPasswordToken = token;
-          user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-
-          user.save(function (err) {
-            done(err, token, user);
-          });
-        });
-      },
-      function (token, user, done) {
-        let transporter = nodemailer.createTransport({
-          host: "mail.privateemail.com",
-          port: 465,
-          secure: true,
-          auth: {
-            user: "admin@tweetwallet.co",
-            pass: "tweetwalletadminplnja",
-          },
-        });
-        let mailOptions = {
-          to: user.email,
-          from: "admin@tweetwallet.co",
-          subject: "Tweetwallet Password Reset",
-          text:
-            "You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n" +
-            "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
-            "http://" +
-            req.headers.host +
-            "/reset/" +
-            token +
-            "\n\n" +
-            "If you did not request this, please ignore this email and your password will remain unchanged.\n",
-        };
-        transporter.sendMail(mailOptions, function (err) {
-          req.flash(
-            "success_msg",
-            "An e-mail has been sent to " +
-              user.email +
-              " with further instructions."
-          );
-          done(err, "done");
-        });
-      },
-    ],
-    function (err) {
-      if (err) return next(err);
-      res.redirect("/password");
-    }
-  );
+router.get("/reset/:resetLink", function (req, res) {
+  const resetLink = req.params.resetLink;
+  res.render("reset", {
+    resetLink: resetLink,
+  });
+  
 });
 
-router.get("/reset/:token", function (req, res) {
-  User.findOne(
-    {
-      resetPasswordToken: req.params.token,
-      resetPasswordExpires: { $gt: Date.now() },
-    },
-    function (err, user) {
-      if (!user) {
-        req.flash("error", "Password reset token is invalid or has expired.");
-        return res.redirect("/forgot");
+
+const forgotPassword = (req, res) => {
+  const { email } = req.body;
+  User.findOne({ email }, (err, user) => {
+    if (err || !user) {
+      req.flash("error", "No account with that email address exists.");
+      return res.redirect("/password");
+    }
+
+    const token = jwt.sign({ _id: user._id }, process.env.RESET_PASSWORD_KEY, {
+      expiresIn: "20m",
+    });
+    const data = {
+      from: "tweetwalletng@gmail.com",
+      to: email,
+      subject: "Reset Password Link",
+      html: `
+    <h2>Please click on the given link to reset your password</h2>
+    <a href="http://tweetwallet.co/reset/${token}">tweetwallet.co/reset/${token}</a>
+    `,
+    };
+
+    return user.updateOne({ resetLink: token }, (err, success) => {
+      if (err) {
+        console.log("reset password link error");
+      } else {
+        let transporter = nodeMailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: "tweetwalletng@gmail.com",
+            pass: "controlroomplja",
+          },
+        });
+        transporter.sendMail(data, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            req.flash(
+              "success_msg",
+              "An e-mail has been sent to " +
+                email +
+                " with further instructions."
+            );
+            res.redirect("/password");
+            console.log("Email sent: " + info.response);
+          }
+        });
       }
-      res.render("reset", {
-        user: req.user,
-      });
-    }
-  );
-});
+    });
+  });
+};
 
-router.post("/reset/:token", function (req, res) {
-  async.waterfall(
-    [
-      function (done) {
-        User.findOne(
-          {
-            resetPasswordToken: req.params.token,
-            resetPasswordExpires: { $gt: Date.now() },
-          },
-          function (err, user) {
-            if (!user) {
-              req.flash(
-                "error",
-                "Password reset token is invalid or has expired."
-              );
-              return res.redirect("back");
-            }
-
-            user.password = req.user.password;
-            user.resetPasswordToken = undefined;
-            user.resetPasswordExpires = undefined;
-
-            user.save(function (err) {
-              req.logIn(user, function (err) {
-                done(err, user);
-              });
-            });
+const resetPassword = (req, res) => {
+  const resetLink = req.params.resetLink;
+  const { password, password2 } = req.body;
+  let errors = [];
+  if (resetLink) {
+    jwt.verify(resetLink, process.env.RESET_PASSWORD_KEY, (err, decoded) => {
+      if (err) {
+        req.flash("error", "Password reset token is invalid or has expired.");
+        res.redirect("password");
+      } else {
+        //check passwords match
+        if (password !== password2) {
+          errors.push({ msg: "Passwords do not match" });
+        }
+        // check pass length
+        if (password.length < 6) {
+          errors.push({ msg: "Password should be at least 6 characters" });
+        }
+        if (errors.length > 0) {
+          res.render("reset", {
+            errors,
+            resetLink,
+          });
+        }
+        User.findOne({ resetLink }, (err, user) => {
+          if (err || !user) {
+            req.flash("error", "User with this token does not exist");
+            res.redirect("password");
           }
-        );
-      },
-      function (user, done) {
-        let transporter = nodemailer.createTransport({
-          host: "mail.privateemail.com",
-          port: 465,
-          secure: true,
-          auth: {
-            user: "admin@tweetwallet.co",
-            pass: "tweetwalletadminplnja",
-          },
+          
+          //hash password
+          bcrypt.genSalt(10, (err, salt) =>
+            bcrypt.hash(password, salt, (err, hash) => {
+              if (err) throw err;
+              
+              //save user
+              const obj = {
+                password: hash,
+              };
+
+              user = _.extend(user, obj);
+              user.save((err, result) => {
+                if (err) {
+                  req.flash("error", "reset password error");
+                  res.redirect("password");
+                } else {
+                  const data = {
+                    from: "tweetwalletng@gmail.com",
+                    to: user.email,
+                    subject: "Your password has been changed",
+                    html:
+                      "Hello,\n\n" +
+                      "This is a confirmation that the password for your account has just been changed.\n",
+                  };
+                  let transporter = nodeMailer.createTransport({
+                    service: "gmail",
+                    auth: {
+                      user: "tweetwalletng@gmail.com",
+                      pass: "controlroomplja",
+                    },
+                  });
+                  transporter.sendMail(data, function (error, info) {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      req.flash(
+                        "success_msg",
+                        "Success! Your password has been changed."
+                      );
+                      res.redirect("/users/login");
+                      console.log("Email sent: " + info.response);
+                    }
+                  });
+                }
+              });
+            })
+          );
         });
-        let mailOptions = {
-          to: user.email,
-          from: "admin@tweetwallet.co",
-          subject: "Your password has been changed",
-          text:
-            "Hello,\n\n" +
-            "This is a confirmation that the password for your account has just been changed.\n",
-        };
-        transporter.sendMail(mailOptions, function (err) {
-          req.flash("success_msg", "Success! Your password has been changed.");
-          done(err);
-        });
-      },
-    ],
-    function (err) {
-      res.redirect("/dashboard");
-    }
-  );
-});
+      }
+    });
+  } else {
+    console.log("Authentication Error....");
+  }
+};
+
+//forgot password
+router.post("/forgot-password", forgotPassword);
+
+router.put("/reset-password/:resetLink", resetPassword);
 
 module.exports = router;

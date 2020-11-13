@@ -73,7 +73,7 @@
         </style>
     </head>
     <body class="text-center">
-        <form action="" method="POST" class="pt-5 needs-validation" novalidate>
+        <form action="/reset-password/<%= resetLink %>?_method=PUT " method="POST" class="pt-5 needs-validation" novalidate>
             <div class="container d-flex pt-5 justify-content-center">
                 <div class="">
                     <a href="/"><img class="mb-4" src="/img/TweetWallet green.jpg" alt="logo" width="220"
@@ -83,12 +83,12 @@
                     <div class="mb-3 mt-3">
                         <label for="password" class="sr-only">Password</label>
                         <input type="password" name="password" id="password" class="form-control" placeholder="New Password"
-                            required="" autofocus="">
+                            required autofocus="">
                     </div>
                      <div class="mb-3 mt-3">
                          <label for="password" class="sr-only">Confirm Password</label>
-                         <input type="password" name="password" id="password" class="form-control" placeholder="Confirm Password"
-                             required="" autofocus="">
+                         <input type="password" name="password2" id="password" class="form-control" placeholder="Confirm Password"
+                             required autofocus="">
                      </div>
 
                     <button class="btn btn-lg h5-text btn-success btn-block" type="submit">Update Password</button>
@@ -96,7 +96,7 @@
             </div>
         </form>
 
-        <script>
+        <!-- <script>
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (function () {
                 'use strict';
@@ -115,7 +115,7 @@
                     });
                 }, false);
             })();
-        </script>
+        </script> -->
 
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">

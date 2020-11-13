@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
   },
   number: {
     type: String,
-  }, 
+  },
   accountname: {
     type: String,
   },
@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Task",
-    }, 
+    },
   ],
   withdraw: {
     type: mongoose.Schema.Types.ObjectId,
@@ -29,9 +29,9 @@ const UserSchema = new mongoose.Schema({
   },
   totalfunds: [
     {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "totalfunds",
-    }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "totalfunds",
+    },
   ],
   accountnumber: {
     type: String,
@@ -45,16 +45,16 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
   },
-  resetPasswordToken: String,
-  resetPasswordExpires: Date,
   date: {
     type: Date,
     default: Date.now,
   },
+  resetLink: {
+    data: String,
+    default: "",
+  },
 });
 
-
 const User = mongoose.model("User", UserSchema);
-
 
 module.exports = User;

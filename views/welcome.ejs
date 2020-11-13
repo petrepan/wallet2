@@ -149,11 +149,15 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link text-secondary h5-text border-bottom d-inline-block" href="/">Home
-                            <span class="sr-only">(current)</span></a>
+                        <% if (req.path == '/' ) { %>
+                            <a 
+                            class="nav-link text-white  h5-text border-bottom d-inline-block rounded-sm bg-success px-4"
+                            href="/">Home
+                            </a>
+                        <% } %>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-secondary h5-text d-inline-block" href="advertise.html">Advertise with
+                        <a class="nav-link text-secondary h5-text d-inline-block" href="/advertise">Advertise with
                             us</a>
                     </li>
                     <li class="nav-item">
@@ -164,14 +168,14 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-secondary h5-text d-inline-block" href="faq.html">Frequently asked
+                        <a class="nav-link text-secondary h5-text d-inline-block" href="/faq">Frequently asked
                             questions</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-secondary h5-text d-inline-block" href="mailto:admin@tweetwallet.co">contact us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white h5-text d-inline-block rounded-sm bg-success px-4"
+                        <a class="nav-link text-secondary h5-text d-inline-block rounded-sm px-4"
                             href="users/register">sign up</a>
                     </li>
 
@@ -180,7 +184,7 @@
             </div>
         </nav>
 
-        <main role="main">
+        <main role="main" >
 
             <div class="jumbotron jumbotron-fluid">
                 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
