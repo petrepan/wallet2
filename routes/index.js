@@ -1,13 +1,13 @@
 const express = require("express");
+const path = require("path");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const nodeMailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const _ = require("lodash");
-var LocalStrategy = require("passport-local").Strategy;
-var async = require("async");
-var crypto = require("crypto");
+var multer = require("multer");
+
 const { ensureAuthenticated } = require("../config/auth");
 const { ensureAdminAuthenticated } = require("../config/adminauth");
 
@@ -17,15 +17,14 @@ const Task = require("../models/Task");
 const Plan = require("../models/Plan");
 const Admin = require("../models/Admin");
 const Totalfunds = require("../models/Totalfunds");
-const Planmercury = require("../models/Planmercury");
+const Upload = require("../models/Upload");
 
 //home page
-router.get("/", (req, res) => res.render("welcome",{req:req}));
+router.get("/", (req, res) => res.render("welcome", { req: req }));
 
-router.get("/advertise", (req, res) => res.render("advertise",{req:req}));
+router.get("/advertise", (req, res) => res.render("advertise", { req: req }));
 
-router.get("/faq", (req, res) => res.render("faq",{req:req}));
-
+router.get("/faq", (req, res) => res.render("faq", { req: req }));
 
 //profile
 router.get("/profile/:id", ensureAuthenticated, (req, res) => {
@@ -94,7 +93,6 @@ router.put("/profile/:id", ensureAuthenticated, async (req, res) => {
     } catch (error) {
       console.log(error);
     }
-   
   }
 });
 
@@ -146,21 +144,27 @@ router.get("/task", ensureAuthenticated, (req, res) => {
   User.findOne(req.user._id)
     .populate("plan totalfunds")
     .then((user) => {
-      console.log(user.totalfunds);
-      if (user.plan !== undefined && user.task !== undefined) {
-        res.render("task", {
-          user: req.user,
-          plan: user.plan,
-          task: user.totalfunds,
-        });
-      } else {
-        res.render("task", {
-          user: req.user,
-          plan: null,
-          task: [],
-        });
-      }
-    });
+      Upload.findOne({ user: "admin" }).then((upload) => {
+        console.log(upload);
+        console.log(user);
+        if (user.plan !== undefined && user.task !== undefined) {
+          res.render("task", {
+            user: req.user,
+            plan: user.plan,
+            task: user.totalfunds,
+            upload,
+          });
+        } else {
+          res.render("task", {
+            user: req.user,
+            plan: null,
+            task: [],
+            upload,
+          });
+        }
+      });
+    })
+    .catch((err) => console.log(err));
 });
 
 router.post("/withdraw", ensureAuthenticated, (req, res) => {
@@ -559,6 +563,107 @@ router.get("/admin/verify", ensureAdminAuthenticated, (req, res) => {
   });
 });
 
+router.get("/admin/upload", ensureAdminAuthenticated, (req, res) => {
+  Admin.findOne({ admin: "admin" }).then((admin) => {
+    res.render("adminUploadTask", admin);
+  });
+});
+
+const uploadTask = async (req, res) => {
+  const { task1, task2, task3, imgtask1, imgtask2, imgtask3 } = req.body;
+
+  const upload = await Upload.findOne({ user: "admin" });
+  try {
+    // const upload = new Upload({ task1, task2, task3 });
+    // const updatedUpload = await upload.save();
+    // req.flash("success_msg", "Task has been successfully uploaded. ");
+    //  res.redirect("/admin/upload");
+    if (upload) {
+      upload.task1 = task1;
+      upload.task2 = task2;
+      upload.task3 = task3;
+      upload.imgtask1 = imgtask1;
+      upload.imgtask2 = imgtask2;
+      upload.imgtask3 = imgtask3;
+
+      const updatedUpload = await upload.save();
+
+      req.flash("success_msg", "Task has been successfully uploaded. ");
+      res.redirect("/admin/upload");
+    } else {
+      const upload = new Upload({ task1, task2, task3 });
+      const updatedUpload = await upload.save();
+      req.flash("success_msg", "Task has been successfully uploaded. ");
+      res.redirect("/admin/upload");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, "public/");
+  },
+  filename(req, file, cb) {
+    cb(null, `${file.fieldname}.jpg`);
+  },
+});
+
+function checkFileType(file, cb) {
+  const filetypes = /jpg|jpeg|png/;
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (extname && mimetype) {
+    return cb(null, true);
+  } else {
+    cb("Images only!");
+  }
+}
+
+const upload = multer({
+  storage,
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb);
+  },
+});
+
+var cpUpload = upload.fields([
+  { name: "imgtask1", maxCount: 1 },
+  { name: "imgtask2", maxCount: 1 },
+  { name: "imgtask3", maxCount: 1 },
+]);
+
+router.put("/admin/upload", ensureAdminAuthenticated, cpUpload, uploadTask);
+
+const togglewithdrawalbtn = async (req, res) => {
+  const togglewithdrawal = !req.body.togglewithdrawal;
+  console.log(togglewithdrawal);
+
+  try {
+    Admin.findOne({ admin: "admin" }).then((toggle) => {
+      toggle.togglewithdrawal = togglewithdrawal;
+      toggle.save().then((done) => {
+        if (toggle.togglewithdrawal) {
+          req.flash("success_msg", "Withdrawal Opened");
+        } else {
+          req.flash("error_msg", "Withdrawal closed");
+        }
+        res.redirect("/admin/upload");
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+router.post(
+  "/admin/togglewithdraw",
+  ensureAdminAuthenticated,
+  togglewithdrawalbtn
+);
+
 router.get("/password", function (req, res) {
   res.render("password", {
     user: req.user,
@@ -570,9 +675,7 @@ router.get("/reset/:resetLink", function (req, res) {
   res.render("reset", {
     resetLink: resetLink,
   });
-  
 });
-
 
 const forgotPassword = (req, res) => {
   const { email } = req.body;
@@ -654,12 +757,12 @@ const resetPassword = (req, res) => {
             req.flash("error", "User with this token does not exist");
             res.redirect("password");
           }
-          
+
           //hash password
           bcrypt.genSalt(10, (err, salt) =>
             bcrypt.hash(password, salt, (err, hash) => {
               if (err) throw err;
-              
+
               //save user
               const obj = {
                 password: hash,

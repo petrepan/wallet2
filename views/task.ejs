@@ -2,31 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Tweet wallet | Dashboard</title>
 
     <!-- Bootstrap core CSS -->
-    <link
-      href="/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://kit.fontawesome.com/314d085fdf.js"
-      crossorigin="anonymous"
-    ></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <script src="https://kit.fontawesome.com/314d085fdf.js" crossorigin="anonymous"></script>
     <!-- Favicons -->
 
     <style>
@@ -184,6 +170,7 @@
                       overflow: auto;
                   }
             } */
+
     </style>
   </head>
   <body>
@@ -194,19 +181,16 @@
 
       <ul>
         <li class="nav-item navigation" data-tab="tab-1">
-          <a class="nav-link link-text text-ref text-muted" href="/dashboard"
-            ><span><i class="fas fa-rocket"></i></span> Choose a plan</a
-          >
+          <a class="nav-link link-text text-ref text-muted" href="/dashboard"><span><i class="fas fa-rocket"></i></span>
+            Choose a plan</a>
         </li>
         <li class="nav-item navigation current" data-tab="tab-2">
-          <a class="nav-link link-text text-ref text-muted" href="/task"
-            ><span><i class="fas fa-life-ring"></i></span> Overview</a
-          >
+          <a class="nav-link link-text text-ref text-muted" href="/task"><span><i class="fas fa-life-ring"></i></span>
+            Overview</a>
         </li>
         <li class="nav-item navigation" data-tab="tab-3">
-          <a class="nav-link link-text text-ref text-muted" href="/withdraw"
-            ><span><i class="fas fa-money-check"></i></span> Withdraw</a
-          >
+          <a class="nav-link link-text text-ref text-muted" href="/withdraw"><span><i
+                class="fas fa-money-check"></i></span> Withdraw</a>
         </li>
       </ul>
     </nav>
@@ -218,17 +202,15 @@
             <span class="text-muted">Howdy</span>
             <span class="username"> <%= user.username %> &#9995;</span>
           </div>
-          <a class="pr-1" href="/profile/<%= user.id %>"
-            ><i class="fas text-success fa-user-circle"> </i
-          ></a>
+          <a class="pr-1" href="/profile/<%= user.id %>"><i class="fas text-success fa-user-circle"> </i></a>
         </header>
         <%- include('partials/messages') %>
         <!--OVERVIEW-->
-<div class="alert alert-dismissible font-weight-lighter alert-info mt-2">
+        <div class="alert alert-dismissible font-weight-lighter alert-info mt-2">
 
-  Please bear with us, we are currently upgrading
+          Please bear with us, we are currently upgrading
 
-</div>
+        </div>
         <div id="tab-2" class="pb-5 mb-5">
           <div class="container">
             <div class="row">
@@ -236,17 +218,11 @@
                 <div>
                   <h4 class="cplan"><b> CURRENT PLAN </b></h4>
                   <% if(plan === null){ %>
-                  <h4
-                    id="current-plan"
-                    class="text-success card-paragraph select-plan"
-                  >
+                  <h4 id="current-plan" class="text-success card-paragraph select-plan">
                     You have to choose a plan
                   </h4>
                   <% }else{ %>
-                  <h4
-                    id="current-plan"
-                    class="text-success card-paragraph select-plan"
-                  >
+                  <h4 id="current-plan" class="text-success card-paragraph select-plan">
                     <%= plan.sub %>
                   </h4>
                   <% } %>
@@ -258,7 +234,51 @@
                 <h3 class="todaytask"> Today's Tasks </h3>
               </div>
 
+              
               <div class="col-lg-4 col-md-12">
+                <h5 class="font-weight-light copy">
+
+                  Task 1: Copy the content below and share on your twitter or facebook
+                  account</h5>
+
+                <div class="card p-3 mx-auto mb-4 text-light bg-dark">
+                  <h6 class="font-weight-light h5-text">
+                    <img style="width: 100%; height: 100%; max-height: 300px; object-fit:contain; object-position:center; margin-bottom: 10px;" src="/imgtask1.jpg" alt="" /> <br />
+                    <%= upload.task1 %>
+                  </h6>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-12">
+                <h5 class="font-weight-light copy">
+
+                  Task 2: Copy the content below and share on your twitter or facebook
+                  account</h5>
+
+                <div class="card p-3 mx-auto mb-4 text-light bg-dark">
+                  <h6 class="font-weight-light h5-text">
+                    <img style="width: 100%; height: 100%; max-height: 300px; object-fit:contain; object-position:center; margin-bottom: 10px;" src="/imgtask2.jpg" alt="" /> <br />
+                    <%= upload.task2 %>
+                  </h6>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-12">
+                <h5 class="font-weight-light copy">
+
+                  Task 3: Copy the content below and share on your twitter or facebook
+                  account</h5>
+
+                <div class="card p-3 mx-auto mb-4 text-light bg-dark">
+                  <h6 class="font-weight-light h5-text">
+                    <img style="width: 100%; height: 100%; max-height: 300px; object-fit:contain; object-position:center; margin-bottom: 10px;" src="/imgtask3.jpg" alt="" /> <br />
+                    <%= upload.task3 %>
+                  </h6>
+                </div>
+              </div>
+             
+
+              <!-- <div class="col-lg-4 col-md-12">
                 <h5 class="font-weight-light copy">
                   Task 1: Copy the content below and share on your twitter
                   account</h5
@@ -294,15 +314,13 @@
                     <div class="ripple-decorator"></div>
                   </h6>
                 </div>
-              </div>
+              </div> -->
 
               <div class="col-12 pb-2 mt-5">
                 <h3 class="todaytask"> Task Submission </h3>
               </div>
               <div class="col-12 mb-0 task">
-                <div
-                  class="alert alert-dismissible font-weight-lighter alert-info mt-2"
-                >
+                <div class="alert alert-dismissible font-weight-lighter alert-info mt-2">
                   Task Submission must be done before 8pm for each day.
                 </div>
               </div>
@@ -316,111 +334,55 @@
               <div class="container">
                 <div class="row">
                   <div class="col-lg-12">
-                    <form
-                      id="taskForm"
-                      action="/task/<%= user._id %>"
-                      method="POST"
-                    >
+                    <form id="taskForm" action="/task/<%= user._id %>" method="POST">
                       <div class="form-group">
                         <label class="d-none">Username</label>
-                        <input
-                          type="text"
-                          name="username"
-                          id="username"
-                          class="form-control input-md d-none"
-                          value="<%= user.username %>"
-                          required
-                        />
+                        <input type="text" name="username" id="username" class="form-control input-md d-none"
+                          value="<%= user.username %>" required />
                       </div>
                       <div class="form-group">
                         <label class="d-none">plan</label>
 
                         <% if(plan === null) { %>
-                        <input
-                          type="text"
-                          name="sub"
-                          id="plan"
-                          class="form-control input-md d-none"
-                          value="No Plans Yet"
-                          required
-                        />
+                        <input type="text" name="sub" id="plan" class="form-control input-md d-none"
+                          value="No Plans Yet" required />
                         <% }else{ %>
-                        <input
-                          type="text"
-                          name="sub"
-                          id="plan"
-                          class="form-control input-md d-none"
-                          value="<%= plan.daily %>"
-                          required
-                        />
+                        <input type="text" name="sub" id="plan" class="form-control input-md d-none"
+                          value="<%= plan.daily %>" required />
                         <% } %>
                       </div>
                       <div class="form-group">
                         <label class="d-none">daily</label>
 
                         <% if(plan === null) { %>
-                        <input
-                          type="text"
-                          name="daily"
-                          id="daily"
-                          class="form-control input-md d-none"
-                          value="0"
-                          required
-                        />
+                        <input type="text" name="daily" id="daily" class="form-control input-md d-none" value="0"
+                          required />
                         <% }else{ %>
-                        <input
-                          type="text"
-                          name="daily"
-                          id="daily"
-                          class="form-control input-md d-none"
-                          value="<%= plan.daily %>"
-                          required
-                        />
+                        <input type="text" name="daily" id="daily" class="form-control input-md d-none"
+                          value="<%= plan.daily %>" required />
                         <% } %>
                       </div>
                       <div class="form-group">
                         <label class="sr-only">Task one</label>
-                        <input
-                          type="url"
-                          name="task1"
-                          id="task1"
-                          class="form-control input-md"
-                          placeholder="Task one"
-                          required
-                        />
+                        <input type="url" name="task1" id="task1" class="form-control input-md" placeholder="Task one"
+                          required />
                       </div>
 
                       <div class="form-group">
                         <label class="sr-only">Task two</label>
-                        <input
-                          type="url"
-                          name="task2"
-                          id="task2"
-                          class="form-control input-md"
-                          placeholder="Task two"
-                          required
-                        />
+                        <input type="url" name="task2" id="task2" class="form-control input-md" placeholder="Task two"
+                          required />
                       </div>
                       <div class="form-group">
                         <label class="sr-only">Task three</label>
-                        <input
-                          type="url"
-                          name="task3"
-                          id="task3"
-                          class="form-control input-md"
-                          placeholder="Task three"
-                          required
-                        />
+                        <input type="url" name="task3" id="task3" class="form-control input-md" placeholder="Task three"
+                          required />
                       </div>
 
                       <% if(plan === null) { %>
-                      <button type="submit" class="btn btn-success" disabled
-                        >Submit Links for confirmation</button
-                      >
+                      <button type="submit" class="btn btn-success" disabled>Submit Links for confirmation</button>
                       <% } else { %>
-                      <button type="submit" class="btn btn-success" disabled
-                        >Submit Links for confirmation</button
-                      >
+                      <button type="submit" class="btn btn-success" disabled>Submit Links for confirmation</button>
                       <% } %>
                     </form>
                   </div>
@@ -431,8 +393,7 @@
                         <div class="jumbotron">
                           <p class="text-danger h5-text">
                             Please note that posting incorrect links or tweets
-                            may lead to account suspension.</p
-                          >
+                            may lead to account suspension.</p>
                         </div>
                       </div>
                     </div>
@@ -465,8 +426,7 @@
                         <td>Awaiting Approval</td>
                         <%}%>
                         <td id="taskStatus"
-                          ><a href="<%= task.task1 %>">Task One</a></td
-                        >
+                          ><a href="<%= task.task1 %>">Task One</a></td>
                         <td><a href="<%= task.task2 %>">Task Two</a></td>
                         <td><a href="<%= task.task3 %>">Task Three </a></td>
                         <td><%= task.date %></td>
@@ -482,26 +442,18 @@
       </div>
     </main>
     <script src="js/dashboard.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="/js/bootstrap.bundle.min.js"
-      integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src="/js/bootstrap.bundle.min.js"
+      integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
+    </script>
     <script src="js/app.js"></script>
   </body>
 </html>

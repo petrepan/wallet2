@@ -1,21 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
         <title>Tweet wallet</title>
 
         <!-- Bootstrap core CSS -->
         <link href="/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous" />
         <script src="https://kit.fontawesome.com/314d085fdf.js" crossorigin="anonymous"></script>
         <!-- Favicons -->
-
-
 
         <style>
             .bd-placeholder-img {
@@ -54,8 +54,6 @@
                 display: block;
             }
 
-           
-
             ul {
                 list-style: none;
                 display: flex;
@@ -73,8 +71,6 @@
             .tab-content {
                 display: none;
             }
-
-
 
             .current {
                 display: inherit;
@@ -141,6 +137,12 @@
                 font-size: 16px;
             }
 
+            textarea {
+                width: 100%;
+                padding: 5px;
+                margin-bottom: 10px;
+            }
+
             /*primary-color: #006600;
         secondary-color: #003300;
 
@@ -180,13 +182,14 @@
                       overflow: auto;
                   }
             } */
+
         </style>
     </head>
 
     <body>
         <nav class="shadow-sm">
             <a class="imgnone" href="index.html">
-                <img src="img/TweetWallet green.jpg" width="200" height="50" alt="">
+                <img src="img/TweetWallet green.jpg" width="200" height="50" alt="" />
             </a>
 
             <ul>
@@ -202,76 +205,57 @@
                     <a class="nav-link link-text text-ref text-muted" href="/admin/task"><span><i
                                 class="fas fa-money-check"></i></span> Tasks</a>
                 </li>
-                <li class="nav-item navigation current" data-tab="tab-4">
-                    <a class="nav-link link-text text-ref text-muted" href="/admin/freeplan"><span><i
+                <li class="nav-item navigation" data-tab="tab-4">
+                    <a class="nav-link link-text text-ref text-muted" href="/admin/verify"><span><i
                                 class="fas fa-money-check"></i></span> Verify</a>
                 </li>
-                  <li class="nav-item navigation" data-tab="tab-4">
-                      <a class="nav-link link-text text-ref text-muted" href="/admin/upload"><span><i
-                                  class="fas fa-cloud-upload-alt"></i></span> Upload</a>
-                  </li>
+                <li class="nav-item navigation current" data-tab="tab-4">
+                    <a class="nav-link link-text text-ref text-muted" href="/admin/upload"><span><i
+                                class="fas fa-cloud-upload-alt"></i></span> Upload</a>
+                </li>
             </ul>
         </nav>
-        <div class="container mt-3">
+        <div class="container mt-3 mb-5">
             <%- include('partials/messages') %>
-              <form action="/subscription/id" method="post" class="form-group">
-                 
-                  <div class="card-body card-paragraph">
-                      <!-- <input class="form-control my-2" type="text" name="id"> -->
-                      <input class="form-control my-2" type="text" name="username" placeholder="username" required>
-                      <input class="form-control my-2" type="text" name="daily" placeholder="daily revenue" required>
-                      <input class="form-control my-2" type="text" name="sub" placeholder="subscription name" required>
+            <form action="/admin/upload?_method=PUT" method="POST" enctype="multipart/form-data" class="form-group">
+                <div class="card-body card-paragraph">
+                    <input type="file" name="imgtask1" id="imgtask1">
+                    <textarea name="task1" id="task1" cols="30" rows="2" placeholder="task one"></textarea>
+                    <input type="file" name="imgtask2" id="imgtask1">
+                    <textarea name="task2" id="task2" cols="30" rows="2" placeholder="task two"></textarea>
+                    <input type="file" name="imgtask3" id="imgtask1">
+                    <textarea name="task3" id="task3" cols="30" rows="2" placeholder="task three"></textarea>
+                    <input type="submit" value="Upload" class="btn btn-success" />
+                </div>
+            </form>
 
-                   <input type="submit" value="Submit" class="btn btn-success">
+            <div class="mx-4 mb-5 pb-5">
+                <form action="/admin/togglewithdraw" method="POST">
+                    <h5>Click button to toggle withdrawal</h5>
+                    <% if(!admin.togglewithdrawal) {%>
+                    <input type="checkbox" name="togglewithdrawal" class="d-none">
+                    <button class="btn btn-danger">click me</button>
+                    <% }else{ %>
+                    <input type="checkbox" name="togglewithdrawal" class="d-none" checked>
+                    <button class="btn btn-success">click me</button>
+                    <% } %>
 
-                  </div>
-              </form>
-
-               <div class="table-responsive text-nowrap mt-3 mb-5 pb-5">
-                   <table class="table overflow-auto">
-                       <thead>
-                           <tr>
-
-                               <th scope="Status">Username</th>
-                               
-                               <th scope="Date">daily revenue</th>
-                               <th scope="Date">sub name</th>
-                               <th scope="Date">Date Registered</th>
-                           </tr>
-                       </thead>
-                       <tbody id="tableBody">
-
-                           <% data.filter(function(item){ %>
-                           <tr class="tableRow">
-                               <td class="userName"><%= item.username %></td>
-                               <td><%= item.daily %></td>
-                               <td><%= item.sub %></td>
-                               <td><%= item.date %></td>
-                           </tr>
-                           <% }); %>
-
-                       </tbody>
-                   </table>
-               </div>
-
+                </form>
+            </div>
         </div>
-         <script src="/js/dashboard.js"></script>
-          <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-              integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-              crossorigin="anonymous">
-          </script>
-          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-              integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-              crossorigin="anonymous">
-          </script>
-          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-              integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-              crossorigin="anonymous">
-          </script>
+        <script src="/js/dashboard.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
 
-          <script src="/js/bootstrap.bundle.min.js"
-              integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
-              crossorigin="anonymous">
-          </script>
+        <script src="/js/bootstrap.bundle.min.js"
+            integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
+        </script>
     </body>
 </html>

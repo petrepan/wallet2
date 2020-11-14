@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
 const flash = require("connect-flash");
@@ -15,7 +16,7 @@ app.use(enforce.HTTPS({ trustProtoHeader: true }));
 //passport config
 require("./config/passport")(passport);
 
-const mongoURI = process.env.MONGO_URI;
+const mongoURI = process.env.MONGO_URI; 
 
 
 //connect to mongo

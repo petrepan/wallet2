@@ -5,11 +5,8 @@ const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const nodeMailer = require("nodemailer");
 
-
 //user model
 const User = require("../models/User");
-
-
 
 //login page
 router.get("/login", (req, res) => {
@@ -34,6 +31,8 @@ router.post("/register", (req, res) => {
     password,
     password2,
   } = req.body;
+  username.trim();
+
   let errors = [];
   //check required fields
   if (
@@ -138,7 +137,5 @@ router.get("/logout", (req, res) => {
   req.flash("success_msg", "You are logged out");
   res.redirect("/users/login");
 });
-
-
 
 module.exports = router;
