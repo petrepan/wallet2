@@ -11,7 +11,7 @@ var http = require("http");
 var enforce = require("express-sslify");
 
 const app = express();
-//app.use(enforce.HTTPS({ trustProtoHeader: true }));
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 //passport config
 require("./config/passport")(passport);
