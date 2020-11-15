@@ -68,6 +68,7 @@
                     font-size: 13px;
                 }
             }
+
         </style>
     </head>
     <body>
@@ -79,9 +80,6 @@
                 <header class="pt-5 justify-content-between row pl-3 pr-3 pb-5">
                     <div class="back">
                         <a href="/dashboard">&lArr; Back to Dashboard</a>
-                    </div>
-                    <div class="back">
-                        <a href="/profile/edit/<%= id %>">Edit Profile</a>
                     </div>
                     <div class="back">
                         <a href="/users/login">Logout</a>
@@ -103,8 +101,9 @@
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group">
                                             <label for="twitter_username" class="m-0">Twitter username</label>
-                                            <input type="text" name="username" id="twitter_username" class="form-control input-md"
-                                                value="<%= username %>" placeholder="Username" disabled>
+                                            <input type="text" name="username" id="twitter_username"
+                                                class="form-control input-md" value="<%= username %>"
+                                                placeholder="Username" disabled>
                                         </div>
                                     </div>
 
@@ -121,29 +120,29 @@
                                         <div class="form-group">
                                             <label class="m-0" for="number">Whatsapp
                                                 number</label>
-                                            <input class="form-control" name="number" id="phone"
-                                               value="<%= number %>" placeholder="Whatsapp number" disabled>
+                                            <input class="form-control" name="number" id="phone" value="<%= number %>"
+                                                placeholder="Whatsapp number" disabled>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group">
                                             <label class="m-0" for="account_name">Account name</label>
                                             <input type="text" name="account_name" class="form-control" id="inputName"
-                                              value="<%= accountname %>" placeholder="Account name" disabled>
+                                                value="<%= accountname %>" placeholder="Account name" disabled>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group">
                                             <label class="m-0" for="number">Account number</label>
                                             <input class="form-control" name="accountnumber" id="phone"
-                                               value="<%= accountnumber %>" placeholder="Account number" disabled>
+                                                value="<%= accountnumber %>" placeholder="Account number" disabled>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group">
                                             <label class="m-0" for="username">Bank name</label>
                                             <input class="form-control" name="accountnumber" id="phone"
-                                               value="<%= accountbank %>" placeholder="Account number" disabled>
+                                                value="<%= accountbank %>" placeholder="Account number" disabled>
                                             <!-- <select form="reginfo" name="accountbank" value=""
                                                 class="form-control custom-select" disabled>
                                                 <option value="">--Select Bank-- </option>
@@ -224,11 +223,13 @@
                                     </div>
 
                                 </div>
-<!-- 
+                                <!-- 
                                 <input class="btn card-paragraph btn-success planbtn" type="submit" value="SUBMIT"> -->
                                 <!-- <a href="https://wa.me/+2348101211029?text=Hello%20Admin%0AI%20will%20like%20to%20edit%20my%20profile" class="btn card-paragraph btn-success planbtn">Contact Admin</a> -->
                             </form>
-
+                            <div class="back">
+                                <a class="bg-success text-white" href="/profile/edit/<%= id %>">Edit Profile</a>
+                            </div>
                         </div>
                     </div>
                 </div>

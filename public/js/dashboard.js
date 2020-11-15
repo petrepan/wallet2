@@ -1,31 +1,17 @@
-// const taskForm = document.getElementById("taskForm");
-// const taskStatus = document.getElementById("taskStatus");
-
-// const submitForm = () => {
-//     taskStatus.innerText = "Task submitted";
-// }
-
-// taskForm.addEventListener("submit", submitForm)
 const searchBar = document.getElementById("searchBar");
 
-// function searchAll() {
-//     const searchValue = document.getElementById("searchBar").value.toUpperCase();
-//     const tableBody = document.getElementById("tableBody");
-//     const tableRow = tableBody.querySelectorAll(".tableRow");
-//     for (let i = 0; i < tableRow.length; i++){
-//         let username = tableRow[i].getElementsByClassName("userName")[0];
-//         console.log(username.textContent)
-//         console.log(searchValue)
-//         console.log(tableRow)
-//         if (username.innerHTML.toUpperCase().indexOf(searchValue) > -1) {
-//             tableRow[i].style.display = 'block';
-//         } else {
-//             tableRow[i].style.display = "none";
-//         }
-//     }
-// }
+const menuBar = document.querySelector(".menu-bar")
+const letterX = document.querySelector(".letterx");
+const navigation = document.querySelector(".navigation");
 
-// searchBar.addEventListener("input", searchAll)
+
+menuBar.addEventListener("click", function () {
+  navigation.classList.add("activenav")
+})
+
+letterX.addEventListener("click", function () {
+  navigation.classList.remove("activenav");
+});
 
 function filterList() {
   const searchValue = document.getElementById("searchBar");

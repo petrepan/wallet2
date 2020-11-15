@@ -37,6 +37,22 @@
                 background: #eafbea;
             }
 
+            .menu-bar {
+                position: absolute;
+                top: 30px;
+                left: 10px;
+                cursor: pointer;
+                font-size: 22px;
+                z-index: 2;
+                display: none;
+            }
+
+            .letterx {
+                display: none;
+                width: 30px;
+                cursor: pointer;
+            }
+
             nav {
                 position: fixed;
                 bottom: 0;
@@ -139,6 +155,50 @@
                 font-size: 16px;
             }
 
+            @media (max-width: 700px) {
+                .menu-bar {
+                    display: block;
+                }
+
+                nav {
+                    top: 0;
+                    width: 250px;
+                    height: 100vh;
+                    transform: translateX(-500px);
+                    opacity: 0;
+                    transition: all .4s ease-in-out;
+                }
+
+                .activenav {
+                    transform: translateX(0px);
+                    opacity: 1;
+                }
+
+                .imgnone {
+                    display: block;
+                    width: 60px;
+                }
+
+                .letterx {
+                    display: block;
+                }
+
+                nav ul {
+                    flex-direction: column;
+                    justify-content: start;
+                    align-items: flex-start;
+
+                }
+
+                nav a {
+                    display: flex !important;
+                }
+
+                nav a span {
+                    margin-right: 5px;
+                }
+            }
+
             /*primary-color: #006600;
         secondary-color: #003300;
 
@@ -178,14 +238,23 @@
                       overflow: auto;
                   }
             } */
+
         </style>
     </head>
 
     <body>
-        <nav class="shadow-sm">
-            <a class="imgnone" href="index.html">
-                <img src="img/TweetWallet green.jpg" width="200" height="50" alt="">
-            </a>
+        <nav class="shadow-sm navigation">
+            <div class="d-flex justify-content-between align-items-center px-1">
+                <a class="imgnone py-3 pl-1" href="index.html">
+                    <img src="img/TweetWallet green.jpg" width="150" alt="">
+                </a>
+                <div class="letterx"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg></div>
+            </div>
+
 
             <ul>
                 <li class="nav-item navigation current" data-tab="tab-1">
@@ -210,10 +279,14 @@
                 </li>
                 <li class="nav-item navigation" data-tab="tab-4">
                     <a class="nav-link link-text text-ref text-muted" href="/admin/logout"><span>
-                        <i class="fas fa-sign-out-alt"></i>></i></span> Logout</a>
+                            <i class="fas fa-sign-out-alt"></i>></i></span> Logout</a>
                 </li>
             </ul>
+
         </nav>
+        <div class="menu-bar">
+            <span><i class="fas fa-bars"></i></span>
+        </div>
         <div class="container mt-3">
             <div class="col-md-12 pb-5">
                 <div class="col-12">
@@ -238,7 +311,7 @@
                         <tbody id="tableBody">
 
                             <% data.filter(function(item){ %>
-                                
+
                             <tr class="tableRow">
                                 <td class="userName"><%= item.username %></td>
                                 <td><%= item.accountbank %></td>
