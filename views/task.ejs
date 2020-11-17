@@ -61,6 +61,26 @@
         text-align: center;
       }
 
+      .mercury {
+        background-color: rgb(224, 242, 250);
+      }
+
+      .venus {
+        background-color: rgb(250, 231, 224);
+      }
+
+      .earth {
+        background-color: rgb(213, 213, 245);
+      }
+
+      .mars {
+        background-color: rgb(255, 249, 224);
+      }
+
+      .sun {
+        background-color: rgb(212, 255, 216);
+      }
+
       .current {
         background-color: #eafbea;
         border-radius: 5px;
@@ -92,14 +112,16 @@
       }
 
       .currentplan {
-        border: 1px solid green;
+        border: 1px solid rgb(174, 211, 174);
         padding: 16px;
-        border-radius: 6px;
+        border-radius: 4px;
       }
 
       .cplan {
         font-weight: 100;
         font-size: 13px;
+        text-transform: capitalize;
+        color: #000;
       }
 
       .todaytask::before {
@@ -206,20 +228,15 @@
         </header>
         <%- include('partials/messages') %>
         <!--OVERVIEW-->
-        <div class="alert alert-dismissible font-weight-lighter alert-info mt-2">
-
-          Please bear with us, we are currently upgrading
-
-        </div>
         <div id="tab-2" class="pb-5 mb-5">
           <div class="container">
             <div class="row">
-              <div class="text-secondary currentplan col-lg-4 pb-4">
+              <div class="text-secondary currentplan col-lg-6 pb-4">
                 <div>
-                  <h4 class="cplan"><b> CURRENT PLAN </b></h4>
+                  <h4 class="cplan">Current Plan</h4>
                   <% if(plan === null){ %>
                   <h4 id="current-plan" class="text-success card-paragraph select-plan">
-                    You have to choose a plan
+                    choose a plan and contact <a class="font-weight-bolder text-success" href="/dashboard">admin</a>
                   </h4>
                   <% }else{ %>
                   <h4 id="current-plan" class="text-success card-paragraph select-plan">
@@ -234,16 +251,18 @@
                 <h3 class="todaytask"> Today's Tasks </h3>
               </div>
 
-              
+
               <div class="col-lg-4 col-md-12">
                 <h5 class="font-weight-light copy">
 
                   Task 1: Copy the content below and share on your twitter or facebook
                   account</h5>
 
-                <div class="card p-3 mx-auto mb-4 text-light bg-dark">
+                <div class="card p-3 mx-auto mb-4 text-dark sun">
                   <h6 class="font-weight-light h5-text">
-                    <img style="width: 100%; height: 100%; max-height: 300px; object-fit:contain; object-position:center; margin-bottom: 10px;" src="/imgtask1.jpg" alt="" /> <br />
+                    <img
+                      style="width: 100%; height: 100%; max-height: 300px; object-fit:contain; object-position:center; margin-bottom: 10px;"
+                      src="/imgtask1.jpg" alt="" /> <br />
                     <%= upload.task1 %>
                   </h6>
                 </div>
@@ -255,9 +274,11 @@
                   Task 2: Copy the content below and share on your twitter or facebook
                   account</h5>
 
-                <div class="card p-3 mx-auto mb-4 text-light bg-dark">
+                <div class="card p-3 mx-auto mb-4 text-dark mercury">
                   <h6 class="font-weight-light h5-text">
-                    <img style="width: 100%; height: 100%; max-height: 300px; object-fit:contain; object-position:center; margin-bottom: 10px;" src="/imgtask2.jpg" alt="" /> <br />
+                    <img
+                      style="width: 100%; height: 100%; max-height: 300px; object-fit:contain; object-position:center; margin-bottom: 10px;"
+                      src="/imgtask2.jpg" alt="" /> <br />
                     <%= upload.task2 %>
                   </h6>
                 </div>
@@ -269,14 +290,16 @@
                   Task 3: Copy the content below and share on your twitter or facebook
                   account</h5>
 
-                <div class="card p-3 mx-auto mb-4 text-light bg-dark">
+                <div class="card p-3 mx-auto mb-4 text-dark venus">
                   <h6 class="font-weight-light h5-text">
-                    <img style="width: 100%; height: 100%; max-height: 300px; object-fit:contain; object-position:center; margin-bottom: 10px;" src="/imgtask3.jpg" alt="" /> <br />
+                    <img
+                      style="width: 100%; height: 100%; max-height: 300px; object-fit:contain; object-position:center; margin-bottom: 10px;"
+                      src="/imgtask3.jpg" alt="" /> <br />
                     <%= upload.task3 %>
                   </h6>
                 </div>
               </div>
-             
+
 
               <!-- <div class="col-lg-4 col-md-12">
                 <h5 class="font-weight-light copy">
@@ -382,7 +405,7 @@
                       <% if(plan === null) { %>
                       <button type="submit" class="btn btn-success" disabled>Submit Links for confirmation</button>
                       <% } else { %>
-                      <button type="submit" class="btn btn-success" disabled>Submit Links for confirmation</button>
+                      <button type="submit" class="btn btn-success">Submit Links for confirmation</button>
                       <% } %>
                     </form>
                   </div>

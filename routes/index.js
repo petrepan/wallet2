@@ -103,7 +103,6 @@ router.get("/dashboard", ensureAuthenticated, (req, res) => {
       user: req.user,
       plan: plan,
     });
-    console.log(req.user);
   });
 });
 
@@ -112,7 +111,7 @@ router.get("/withdraw", ensureAuthenticated, (req, res) => {
     .populate("task totalfunds plan")
     .then((user) => {
       function accbal(bal) {
-        let calcbal = 0;
+        let calcbal = 0; 
         for (let i = 0; i < bal.length; i++) {
           if (bal[i].allowBalance) {
             calcbal += bal[i].accountbalance;
