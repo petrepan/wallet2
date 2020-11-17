@@ -79,6 +79,11 @@
                 text-align: center;
             }
 
+            textarea{
+                width: 100%;
+                padding: 10px;
+            }
+
             .current {
                 background-color: #eafbea;
                 border-radius: 5px;
@@ -286,11 +291,11 @@
             <form action="/admin/upload?_method=PUT" method="POST" enctype="multipart/form-data" class="form-group">
                 <div class="card-body card-paragraph">
                     <input type="file" name="imgtask1" id="imgtask1">
-                    <textarea name="task1" id="task1" cols="30" rows="2" placeholder="task one"></textarea>
+                    <textarea name="task1" id="task1" cols="30" rows="3" placeholder="task one"></textarea>
                     <input type="file" name="imgtask2" id="imgtask1">
-                    <textarea name="task2" id="task2" cols="30" rows="2" placeholder="task two"></textarea>
+                    <textarea name="task2" id="task2" cols="30" rows="3" placeholder="task two"></textarea>
                     <input type="file" name="imgtask3" id="imgtask1">
-                    <textarea name="task3" id="task3" cols="30" rows="2" placeholder="task three"></textarea>
+                    <textarea name="task3" id="task3" cols="30" rows="3" placeholder="task three"></textarea>
                     <input type="submit" value="Upload" class="btn btn-success" />
                 </div>
             </form>
