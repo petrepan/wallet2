@@ -145,7 +145,7 @@ router.get("/task", ensureAuthenticated, (req, res) => {
     .then((user) => {
       Upload.findOne({ user: "admin" }).then((upload) => {
         console.log(upload);
-        console.log(user);
+        console.log(user.plan);
         if (user.plan !== undefined && user.task !== undefined) {
           res.render("task", {
             user: req.user,
