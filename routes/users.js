@@ -72,10 +72,10 @@ router.post("/register", (req, res) => {
     });
   } else {
     //Validation pass
-    User.findOne({ username: username }).then((user) => {
+    User.findOne({ username: username, email:email }).then((user) => {
       if (user) {
         //user exist
-        errors.push({ msg: "Username is already registered" });
+        errors.push({ msg: "Username or email  already taken" });
         res.render("register", {
           errors,
           fullname,
