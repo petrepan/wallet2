@@ -16,8 +16,7 @@ app.use(enforce.HTTPS({ trustProtoHeader: true }));
 //passport config
 require("./config/passport")(passport);
 
-const mongoURI = process.env.MONGO_URI; 
-
+const mongoURI = process.env.MONGO_URI;
 
 //connect to mongo
 mongoose
