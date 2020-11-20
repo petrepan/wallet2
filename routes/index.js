@@ -590,7 +590,7 @@ const uploadTask = async (req, res) => {
       req.flash("success_msg", "Task has been successfully uploaded. ");
       res.redirect("/admin/upload");
     } else {
-      const upload = new Upload({ task1, task2, task3 });
+      const upload = new Upload({ task1, task2, task3, imgtask1, imgtask2, imgtask3 });
       const updatedUpload = await upload.save();
       req.flash("success_msg", "Task has been successfully uploaded. ");
       res.redirect("/admin/upload");
