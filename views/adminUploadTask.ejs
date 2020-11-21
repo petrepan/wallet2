@@ -79,7 +79,7 @@
                 text-align: center;
             }
 
-            textarea{
+            textarea {
                 width: 100%;
                 padding: 10px;
             }
@@ -303,12 +303,39 @@
             <div class="mx-4 mb-5 pb-5">
                 <form action="/admin/togglewithdraw" method="POST">
                     <h5>Click button to toggle withdrawal</h5>
+
                     <% if(!admin.togglewithdrawal) {%>
-                    <input type="checkbox" name="togglewithdrawal" class="d-none">
-                    <button class="btn btn-danger">click me</button>
+                    <div>
+                        <input type="checkbox" name="togglewithdrawal" class="d-none">
+                        <button type="submit" class="btn btn-danger">
+                            click me
+                        </button>
+                    </div>
                     <% }else{ %>
-                    <input type="checkbox" name="togglewithdrawal" class="d-none" checked>
-                    <button class="btn btn-success">click me</button>
+                    <div>
+                        <input type="checkbox" name="togglewithdrawal" class="d-none" checked>
+                        <button type="submit" class="btn btn-success">
+                            click me
+                        </button>
+                    </div>
+
+                    <% } %>
+                    
+                    <% if(admin.togglewithdrawal) {%>
+                    <div>
+                        <input type="checkbox" name="togglewithdrawal" class="d-none">
+                        <button type="submit" class="btn btn-danger">
+                            click me
+                        </button>
+                    </div>
+                    <% }else{ %>
+                    <div>
+                        <input type="checkbox" name="togglewithdrawal" class="d-none" checked>
+                        <button type="submit" class="btn btn-success">
+                            click me
+                        </button>
+                    </div>
+
                     <% } %>
 
                 </form>

@@ -111,7 +111,7 @@ router.get("/withdraw", ensureAuthenticated, (req, res) => {
     .populate("task totalfunds plan")
     .then((user) => {
       function accbal(bal) {
-        let calcbal = 0; 
+        let calcbal = 0;
         for (let i = 0; i < bal.length; i++) {
           if (bal[i].allowBalance) {
             calcbal += bal[i].accountbalance;
@@ -119,6 +119,8 @@ router.get("/withdraw", ensureAuthenticated, (req, res) => {
         }
         return calcbal;
       }
+
+      Admin.findOne("admin").then((admin) => {});
 
       if (user.totalfunds !== undefined) {
         res.render("withdraw", {
@@ -564,6 +566,7 @@ router.get("/admin/verify", ensureAdminAuthenticated, (req, res) => {
 
 router.get("/admin/upload", ensureAdminAuthenticated, (req, res) => {
   Admin.findOne({ admin: "admin" }).then((admin) => {
+    console.log(admin);
     res.render("adminUploadTask", admin);
   });
 });
@@ -636,25 +639,26 @@ var cpUpload = upload.fields([
 
 router.put("/admin/upload", ensureAdminAuthenticated, cpUpload, uploadTask);
 
-const togglewithdrawalbtn = async (req, res) => {
-  const togglewithdrawal = !req.body.togglewithdrawal;
+const togglewithdrawalbtn = (req, res) => {
+  let togglewithdrawal = !req.body.togglewithdrawal;
   console.log(togglewithdrawal);
 
-  try {
-    Admin.findOne({ admin: "admin" }).then((toggle) => {
-      toggle.togglewithdrawal = togglewithdrawal;
-      toggle.save().then((done) => {
-        if (toggle.togglewithdrawal) {
-          req.flash("success_msg", "Withdrawal Opened");
-        } else {
-          req.flash("error_msg", "Withdrawal closed");
-        }
-        res.redirect("/admin/upload");
-      });
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  Admin.findOne({ admin: "admin" })
+    .then((admin) => {
+      admin.togglewithdrawal = togglewithdrawal;
+      admin
+        .save()
+        .then((done) => {
+          if (admin.togglewithdrawal) {
+            req.flash("success_msg", "Withdrawal Opened");
+          } else {
+            req.flash("error_msg", "Withdrawal closed");
+          }
+          res.redirect("/admin/upload");
+        })
+        .catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
 };
 
 router.post(
