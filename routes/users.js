@@ -72,8 +72,7 @@ router.post("/register", (req, res) => {
     });
   } else {
     //Validation pass
-    User.find()
-    .or([{ username: username},{ email:email }])
+    User.findOne({username:username})
     .then((user) => {
       if (user) {
         //user exist
