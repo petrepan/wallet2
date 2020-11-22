@@ -76,7 +76,7 @@ router.post("/register", (req, res) => {
     .then((user) => {
       if (user) {
         //user exist
-        errors.push({ msg: "Username or email  already taken" });
+        errors.push({ msg: "Username  already taken" });
         res.render("register", {
           errors,
           fullname,
